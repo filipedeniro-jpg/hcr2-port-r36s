@@ -1,0 +1,62 @@
+
+glowball.png
+size: 496,270
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+glowball_balls
+  rotate: false
+  xy: 258, 85
+  size: 142, 185
+  orig: 142, 185
+  offset: 0, 0
+  index: -1
+glowball_glow
+  rotate: false
+  xy: 0, 43
+  size: 258, 227
+  orig: 258, 227
+  offset: 0, 0
+  index: -1
+glowball_rock1
+  rotate: false
+  xy: 323, 36
+  size: 65, 49
+  orig: 65, 49
+  offset: 0, 0
+  index: -1
+glowball_rock2
+  rotate: true
+  xy: 461, 49
+  size: 51, 35
+  orig: 51, 35
+  offset: 0, 0
+  index: -1
+glowball_shadow
+  rotate: true
+  xy: 400, 0
+  size: 270, 61
+  orig: 270, 61
+  offset: 0, 0
+  index: -1
+glowball_weed1
+  rotate: true
+  xy: 0, 7
+  size: 36, 289
+  orig: 36, 289
+  offset: 0, 0
+  index: -1
+glowball_weed2
+  rotate: true
+  xy: 258, 56
+  size: 29, 65
+  orig: 29, 65
+  offset: 0, 0
+  index: -1
+glowball_weed3
+  rotate: false
+  xy: 461, 100
+  size: 24, 170
+  orig: 24, 170
+  offset: 0, 0
+  index: -1

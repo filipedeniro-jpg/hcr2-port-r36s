@@ -1,0 +1,8 @@
+package com.amazon.device.ads;
+
+import android.graphics.Rect;
+
+/* JADX INFO: loaded from: classes.dex */
+interface OnAdResizedCommand {
+    void onAdResized(Ad ad, Rect rect);
+}

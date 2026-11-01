@@ -1,0 +1,53 @@
+package com.my.target;
+
+/* JADX INFO: compiled from: MyTargetKeys.java */
+/* JADX INFO: loaded from: classes2.dex */
+public interface i {
+    public static final String A = "os";
+    public static final String ANDROID_ID = "android_id";
+    public static final String B = "manufacture";
+    public static final String C = "osver";
+    public static final String D = "app";
+    public static final String DEVICE = "device";
+    public static final String DURATION = "duration";
+    public static final String E = "appver";
+    public static final String EMAIL = "email";
+    public static final String F = "appbuild";
+    public static final String G = "lang";
+    public static final String H = "g";
+    public static final String HEIGHT = "h";
+    public static final String I = "a";
+    public static final String J = "app_lang";
+    public static final String K = "timezone";
+    public static final String L = "sim_loc";
+    public static final String LOCATION = "location";
+    public static final String M = "euname";
+    public static final String N = "dpi";
+    public static final String O = "density";
+    public static final String P = "operator_id";
+    public static final String Q = "operator_name";
+    public static final String R = "sim_operator_id";
+    public static final String S = "wifi";
+    public static final String T = "cell";
+    public static final String U = "formats";
+    public static final String V = "location_provider";
+    public static final String W = "adman_ver";
+    public static final String WIDTH = "w";
+    public static final String X = "exb";
+    public static final String Y = "connection_type";
+    public static final String Z = "preloadvideo";
+    public static final String aa = "count";
+    public static final String ab = "user_consent";
+    public static final String ac = "user_age_restricted";
+    public static final String ad = "rooted";
+    public static final String ae = "bid_id";
+    public static final String af = "mrgs_device_id";
+    public static final String ag = "mrgs_user_id";
+    public static final String ah = "mrgs_app_id";
+    public static final String ai = "icq_id";
+    public static final String aj = "ok_id";
+    public static final String ak = "vk_id";
+    public static final String al = "advertising_id";
+    public static final String am = "advertising_tracking_enabled";
+    public static final String z = "connection";
+}

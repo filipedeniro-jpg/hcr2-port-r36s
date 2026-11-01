@@ -1,0 +1,10 @@
+#ifndef GL_ES
+#define lowp
+#endif
+
+varying lowp vec2 texCoord;
+varying lowp vec4 color;
+
+void main() {
+	gl_FragColor = texture2D(CC_Texture0, texCoord) * color;
+}

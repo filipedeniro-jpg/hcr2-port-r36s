@@ -1,0 +1,13 @@
+
+tube-gate-back.png
+size: 161,292
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+gate-back
+  rotate: false
+  xy: 0, 0
+  size: 161, 292
+  orig: 161, 292
+  offset: 0, 0
+  index: -1

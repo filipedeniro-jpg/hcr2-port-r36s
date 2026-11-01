@@ -1,0 +1,151 @@
+{
+"skeleton": { "hash": "cq8fikt+7WwHWxoylGJuC2tRaSM", "spine": "3.6.53", "width": 351.5, "height": 333 },
+"bones": [
+	{ "name": "root" },
+	{ "name": "balls", "parent": "root", "x": 0.3, "y": -14.9 },
+	{ "name": "weed1", "parent": "root", "x": 44.86, "y": -20.04 },
+	{ "name": "weed2", "parent": "root", "x": -27.84, "y": -11.15 },
+	{ "name": "weed3", "parent": "root", "x": 20.8, "y": 17.09 }
+],
+"slots": [
+	{ "name": "glowball_shadow", "bone": "root", "attachment": "glowball_shadow" },
+	{ "name": "glowball_weed3", "bone": "weed3", "attachment": "glowball_weed3" },
+	{ "name": "glowball_rock2", "bone": "root", "attachment": "glowball_rock2" },
+	{ "name": "glowball_balls", "bone": "balls", "attachment": "glowball_balls" },
+	{ "name": "glowball_glow", "bone": "balls", "color": "ffffff51", "attachment": "glowball_glow", "blend": "additive" },
+	{ "name": "glowball_rock1", "bone": "root", "attachment": "glowball_rock1" },
+	{ "name": "glowball_weed2", "bone": "weed2", "attachment": "glowball_weed2" },
+	{ "name": "glowball_weed1", "bone": "weed1", "attachment": "glowball_weed1" }
+],
+"skins": {
+	"default": {
+		"glowball_balls": {
+			"glowball_balls": { "x": 8.89, "y": 90.35, "width": 142, "height": 185 }
+		},
+		"glowball_glow": {
+			"glowball_glow": { "x": 10.89, "y": 128.85, "width": 258, "height": 227 }
+		},
+		"glowball_rock1": {
+			"glowball_rock1": { "x": 20.69, "y": -8.05, "width": 65, "height": 49 }
+		},
+		"glowball_rock2": {
+			"glowball_rock2": { "x": -16.31, "y": 6.95, "width": 51, "height": 35 }
+		},
+		"glowball_shadow": {
+			"glowball_shadow": { "x": 98.69, "y": -37.05, "width": 270, "height": 61 }
+		},
+		"glowball_weed1": {
+			"glowball_weed1": { "x": 12.33, "y": 140.99, "width": 36, "height": 289 }
+		},
+		"glowball_weed2": {
+			"glowball_weed2": { "x": -9.47, "y": 29.6, "width": 29, "height": 65 }
+		},
+		"glowball_weed3": {
+			"glowball_weed3": { "x": 11.89, "y": 84.86, "width": 24, "height": 170 }
+		}
+	}
+},
+"animations": {
+	"default": {
+		"slots": {
+			"glowball_glow": {
+				"color": [
+					{
+						"time": 0,
+						"color": "ffffff51",
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{
+						"time": 1,
+						"color": "ffffffa5",
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{ "time": 2, "color": "ffffff51" }
+				]
+			}
+		},
+		"bones": {
+			"weed1": {
+				"rotate": [
+					{
+						"time": 0,
+						"angle": 0,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{
+						"time": 1.2667,
+						"angle": -16.58,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{ "time": 2, "angle": 0 }
+				]
+			},
+			"weed2": {
+				"rotate": [
+					{
+						"time": 0,
+						"angle": 0,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{
+						"time": 1,
+						"angle": 25.72,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{ "time": 2, "angle": 0 }
+				]
+			},
+			"weed3": {
+				"rotate": [
+					{
+						"time": 0,
+						"angle": 0,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{
+						"time": 0.6667,
+						"angle": -15.81,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{ "time": 2, "angle": 0 }
+				]
+			},
+			"balls": {
+				"rotate": [
+					{
+						"time": 0,
+						"angle": 0,
+						"curve": [ 0.447, 0.44, 0.75, 1 ]
+					},
+					{
+						"time": 0.6667,
+						"angle": 10.8,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{
+						"time": 1.7333,
+						"angle": -2.52,
+						"curve": [ 0.25, 0, 0.634, 0.63 ]
+					},
+					{ "time": 2, "angle": 0 }
+				],
+				"scale": [
+					{
+						"time": 0,
+						"x": 1,
+						"y": 1,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{
+						"time": 1.1333,
+						"x": 1,
+						"y": 1.087,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{ "time": 2, "x": 1, "y": 1 }
+				]
+			}
+		}
+	}
+}
+}

@@ -1,0 +1,17 @@
+{
+  "endereco": "0xe316f0",
+  "raiz_funcao": "0xe316f0",
+  "fim_funcao": "0xe317b4",
+  "total_chamadores": 9,
+  "chamadores": [
+    "0x56a254",
+    "0x56a38c",
+    "0x56a48c",
+    "0xcbe618",
+    "0xe30dec",
+    "0xe30e90",
+    "0xe30f34",
+    "0xe30fcc",
+    "0xe31088"
+  ]
+}

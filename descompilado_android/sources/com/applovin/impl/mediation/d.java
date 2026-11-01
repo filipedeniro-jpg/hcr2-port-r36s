@@ -1,0 +1,11 @@
+package com.applovin.impl.mediation;
+
+import com.applovin.mediation.MaxAd;
+import com.applovin.mediation.MaxAdListener;
+
+/* JADX INFO: loaded from: classes.dex */
+public interface d extends MaxAdListener {
+    void a(MaxAd maxAd, int i, String str);
+
+    void a(String str, int i, String str2);
+}

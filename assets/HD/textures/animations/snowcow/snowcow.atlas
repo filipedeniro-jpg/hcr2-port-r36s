@@ -1,0 +1,41 @@
+
+snowcow.png
+size: 433,240
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+cow_ear-left
+  rotate: false
+  xy: 253, 37
+  size: 53, 28
+  orig: 53, 28
+  offset: 0, 0
+  index: -1
+cow_ear-right
+  rotate: false
+  xy: 253, 65
+  size: 64, 30
+  orig: 64, 30
+  offset: 0, 0
+  index: -1
+cow_tail
+  rotate: false
+  xy: 379, 87
+  size: 54, 153
+  orig: 54, 153
+  offset: 0, 0
+  index: -1
+snow-head
+  rotate: false
+  xy: 253, 95
+  size: 126, 145
+  orig: 126, 145
+  offset: 0, 0
+  index: -1
+snow_body
+  rotate: false
+  xy: 0, 0
+  size: 253, 240
+  orig: 253, 240
+  offset: 0, 0
+  index: -1

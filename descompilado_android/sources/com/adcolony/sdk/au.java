@@ -1,0 +1,421 @@
+package com.adcolony.sdk;
+
+import android.content.Context;
+import android.graphics.Typeface;
+import android.view.MotionEvent;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import androidx.core.view.MotionEventCompat;
+import com.google.android.exoplayer2.util.MimeTypes;
+import org.json.JSONObject;
+
+/* JADX INFO: loaded from: classes.dex */
+class au extends Button {
+    private c A;
+    private af B;
+    private final int a;
+    private final int b;
+    private final int c;
+    private final int d;
+    private final int e;
+    private final int f;
+    private final int g;
+    private final int h;
+    private final int i;
+    private final int j;
+    private final int k;
+    private final int l;
+    private int m;
+    private int n;
+    private int o;
+    private int p;
+    private int q;
+    private int r;
+    private int s;
+    private int t;
+    private int u;
+    private int v;
+    private String w;
+    private String x;
+    private String y;
+    private String z;
+
+    int a(boolean z, int i) {
+        if (i == 0) {
+            return z ? 1 : 16;
+        }
+        if (i == 1) {
+            return z ? 3 : 48;
+        }
+        if (i != 2) {
+            return 17;
+        }
+        return z ? 5 : 80;
+    }
+
+    au(Context context, af afVar, int i, c cVar) {
+        super(context);
+        this.a = 0;
+        this.b = 1;
+        this.c = 2;
+        this.d = 3;
+        this.e = 1;
+        this.f = 2;
+        this.g = 3;
+        this.h = 0;
+        this.i = 1;
+        this.j = 2;
+        this.k = 1;
+        this.l = 2;
+        this.m = i;
+        this.B = afVar;
+        this.A = cVar;
+    }
+
+    au(Context context, int i, af afVar, int i2, c cVar) {
+        super(context, null, i);
+        this.a = 0;
+        this.b = 1;
+        this.c = 2;
+        this.d = 3;
+        this.e = 1;
+        this.f = 2;
+        this.g = 3;
+        this.h = 0;
+        this.i = 1;
+        this.j = 2;
+        this.k = 1;
+        this.l = 2;
+        this.m = i2;
+        this.B = afVar;
+        this.A = cVar;
+    }
+
+    void a(af afVar) {
+        JSONObject jSONObjectC = afVar.c();
+        this.u = y.c(jSONObjectC, "x");
+        this.v = y.c(jSONObjectC, "y");
+        setGravity(a(true, this.u) | a(false, this.v));
+    }
+
+    void b(af afVar) {
+        JSONObject jSONObjectA = y.a();
+        y.a(jSONObjectA, MimeTypes.BASE_TYPE_TEXT, getText().toString());
+        afVar.a(jSONObjectA).b();
+    }
+
+    @Override // android.widget.TextView, android.view.View
+    public boolean onTouchEvent(MotionEvent motionEvent) {
+        l lVarA = a.a();
+        d dVarM = lVarA.m();
+        int action = motionEvent.getAction() & 255;
+        if (action != 0 && action != 1 && action != 3 && action != 2 && action != 5 && action != 6) {
+            return false;
+        }
+        int x = (int) motionEvent.getX();
+        int y = (int) motionEvent.getY();
+        JSONObject jSONObjectA = y.a();
+        y.b(jSONObjectA, "view_id", this.m);
+        y.a(jSONObjectA, "ad_session_id", this.z);
+        y.b(jSONObjectA, "container_x", this.n + x);
+        y.b(jSONObjectA, "container_y", this.o + y);
+        y.b(jSONObjectA, "view_x", x);
+        y.b(jSONObjectA, "view_y", y);
+        y.b(jSONObjectA, "id", this.A.getId());
+        if (action == 0) {
+            new af("AdContainer.on_touch_began", this.A.c(), jSONObjectA).b();
+            return true;
+        }
+        if (action == 1) {
+            if (!this.A.r()) {
+                lVarA.a(dVarM.f().get(this.z));
+            }
+            if (x > 0 && x < getWidth() && y > 0 && y < getHeight()) {
+                new af("AdContainer.on_touch_ended", this.A.c(), jSONObjectA).b();
+                return true;
+            }
+            new af("AdContainer.on_touch_cancelled", this.A.c(), jSONObjectA).b();
+            return true;
+        }
+        if (action == 2) {
+            new af("AdContainer.on_touch_moved", this.A.c(), jSONObjectA).b();
+            return true;
+        }
+        if (action == 3) {
+            new af("AdContainer.on_touch_cancelled", this.A.c(), jSONObjectA).b();
+            return true;
+        }
+        if (action == 5) {
+            int action2 = (motionEvent.getAction() & MotionEventCompat.ACTION_POINTER_INDEX_MASK) >> 8;
+            y.b(jSONObjectA, "container_x", ((int) motionEvent.getX(action2)) + this.n);
+            y.b(jSONObjectA, "container_y", ((int) motionEvent.getY(action2)) + this.o);
+            y.b(jSONObjectA, "view_x", (int) motionEvent.getX(action2));
+            y.b(jSONObjectA, "view_y", (int) motionEvent.getY(action2));
+            new af("AdContainer.on_touch_began", this.A.c(), jSONObjectA).b();
+            return true;
+        }
+        if (action != 6) {
+            return true;
+        }
+        int action3 = (motionEvent.getAction() & MotionEventCompat.ACTION_POINTER_INDEX_MASK) >> 8;
+        int x2 = (int) motionEvent.getX(action3);
+        int y2 = (int) motionEvent.getY(action3);
+        y.b(jSONObjectA, "container_x", ((int) motionEvent.getX(action3)) + this.n);
+        y.b(jSONObjectA, "container_y", ((int) motionEvent.getY(action3)) + this.o);
+        y.b(jSONObjectA, "view_x", (int) motionEvent.getX(action3));
+        y.b(jSONObjectA, "view_y", (int) motionEvent.getY(action3));
+        if (!this.A.r()) {
+            lVarA.a(dVarM.f().get(this.z));
+        }
+        if (x2 > 0 && x2 < getWidth() && y2 > 0 && y2 < getHeight()) {
+            new af("AdContainer.on_touch_ended", this.A.c(), jSONObjectA).b();
+            return true;
+        }
+        new af("AdContainer.on_touch_cancelled", this.A.c(), jSONObjectA).b();
+        return true;
+    }
+
+    boolean c(af afVar) {
+        JSONObject jSONObjectC = afVar.c();
+        return y.c(jSONObjectC, "id") == this.m && y.c(jSONObjectC, "container_id") == this.A.d() && y.b(jSONObjectC, "ad_session_id").equals(this.A.b());
+    }
+
+    void a() {
+        int iO;
+        int iO2;
+        JSONObject jSONObjectC = this.B.c();
+        this.z = y.b(jSONObjectC, "ad_session_id");
+        this.n = y.c(jSONObjectC, "x");
+        this.o = y.c(jSONObjectC, "y");
+        this.p = y.c(jSONObjectC, "width");
+        this.q = y.c(jSONObjectC, "height");
+        this.s = y.c(jSONObjectC, "font_family");
+        this.r = y.c(jSONObjectC, "font_style");
+        this.t = y.c(jSONObjectC, "font_size");
+        this.w = y.b(jSONObjectC, "background_color");
+        this.x = y.b(jSONObjectC, "font_color");
+        this.y = y.b(jSONObjectC, MimeTypes.BASE_TYPE_TEXT);
+        this.u = y.c(jSONObjectC, "align_x");
+        this.v = y.c(jSONObjectC, "align_y");
+        l lVarA = a.a();
+        if (this.y.equals("")) {
+            this.y = "Learn More";
+        }
+        setVisibility(4);
+        FrameLayout.LayoutParams layoutParams = y.d(jSONObjectC, "wrap_content") ? new FrameLayout.LayoutParams(-2, -2) : new FrameLayout.LayoutParams(this.p, this.q);
+        layoutParams.gravity = 0;
+        setText(this.y);
+        setTextSize(this.t);
+        if (y.d(jSONObjectC, "overlay")) {
+            this.n = 0;
+            this.o = 0;
+            iO = (int) (lVarA.c.o() * 6.0f);
+            iO2 = (int) (lVarA.c.o() * 6.0f);
+            int iO3 = (int) (lVarA.c.o() * 4.0f);
+            setPadding(iO3, iO3, iO3, iO3);
+            layoutParams.gravity = 85;
+        } else {
+            iO = 0;
+            iO2 = 0;
+        }
+        layoutParams.setMargins(this.n, this.o, iO, iO2);
+        this.A.addView(this, layoutParams);
+        int i = this.s;
+        if (i == 0) {
+            setTypeface(Typeface.DEFAULT);
+        } else if (i == 1) {
+            setTypeface(Typeface.SERIF);
+        } else if (i == 2) {
+            setTypeface(Typeface.SANS_SERIF);
+        } else if (i == 3) {
+            setTypeface(Typeface.MONOSPACE);
+        }
+        int i2 = this.r;
+        if (i2 == 0) {
+            setTypeface(getTypeface(), 0);
+        } else if (i2 == 1) {
+            setTypeface(getTypeface(), 1);
+        } else if (i2 == 2) {
+            setTypeface(getTypeface(), 2);
+        } else if (i2 == 3) {
+            setTypeface(getTypeface(), 3);
+        }
+        setGravity(a(true, this.u) | a(false, this.v));
+        if (!this.w.equals("")) {
+            setBackgroundColor(aw.g(this.w));
+        }
+        if (!this.x.equals("")) {
+            setTextColor(aw.g(this.x));
+        }
+        this.A.n().add(a.a("TextView.set_visible", new ah() { // from class: com.adcolony.sdk.au.1
+            @Override // com.adcolony.sdk.ah
+            public void a(af afVar) {
+                if (au.this.c(afVar)) {
+                    au.this.k(afVar);
+                }
+            }
+        }, true));
+        this.A.n().add(a.a("TextView.set_bounds", new ah() { // from class: com.adcolony.sdk.au.3
+            @Override // com.adcolony.sdk.ah
+            public void a(af afVar) {
+                if (au.this.c(afVar)) {
+                    au.this.d(afVar);
+                }
+            }
+        }, true));
+        this.A.n().add(a.a("TextView.set_font_color", new ah() { // from class: com.adcolony.sdk.au.4
+            @Override // com.adcolony.sdk.ah
+            public void a(af afVar) {
+                if (au.this.c(afVar)) {
+                    au.this.f(afVar);
+                }
+            }
+        }, true));
+        this.A.n().add(a.a("TextView.set_background_color", new ah() { // from class: com.adcolony.sdk.au.5
+            @Override // com.adcolony.sdk.ah
+            public void a(af afVar) {
+                if (au.this.c(afVar)) {
+                    au.this.e(afVar);
+                }
+            }
+        }, true));
+        this.A.n().add(a.a("TextView.set_typeface", new ah() { // from class: com.adcolony.sdk.au.6
+            @Override // com.adcolony.sdk.ah
+            public void a(af afVar) {
+                if (au.this.c(afVar)) {
+                    au.this.j(afVar);
+                }
+            }
+        }, true));
+        this.A.n().add(a.a("TextView.set_font_size", new ah() { // from class: com.adcolony.sdk.au.7
+            @Override // com.adcolony.sdk.ah
+            public void a(af afVar) {
+                if (au.this.c(afVar)) {
+                    au.this.g(afVar);
+                }
+            }
+        }, true));
+        this.A.n().add(a.a("TextView.set_font_style", new ah() { // from class: com.adcolony.sdk.au.8
+            @Override // com.adcolony.sdk.ah
+            public void a(af afVar) {
+                if (au.this.c(afVar)) {
+                    au.this.h(afVar);
+                }
+            }
+        }, true));
+        this.A.n().add(a.a("TextView.get_text", new ah() { // from class: com.adcolony.sdk.au.9
+            @Override // com.adcolony.sdk.ah
+            public void a(af afVar) {
+                if (au.this.c(afVar)) {
+                    au.this.b(afVar);
+                }
+            }
+        }, true));
+        this.A.n().add(a.a("TextView.set_text", new ah() { // from class: com.adcolony.sdk.au.10
+            @Override // com.adcolony.sdk.ah
+            public void a(af afVar) {
+                if (au.this.c(afVar)) {
+                    au.this.i(afVar);
+                }
+            }
+        }, true));
+        this.A.n().add(a.a("TextView.align", new ah() { // from class: com.adcolony.sdk.au.2
+            @Override // com.adcolony.sdk.ah
+            public void a(af afVar) {
+                if (au.this.c(afVar)) {
+                    au.this.a(afVar);
+                }
+            }
+        }, true));
+        this.A.o().add("TextView.set_visible");
+        this.A.o().add("TextView.set_bounds");
+        this.A.o().add("TextView.set_font_color");
+        this.A.o().add("TextView.set_background_color");
+        this.A.o().add("TextView.set_typeface");
+        this.A.o().add("TextView.set_font_size");
+        this.A.o().add("TextView.set_font_style");
+        this.A.o().add("TextView.get_text");
+        this.A.o().add("TextView.set_text");
+        this.A.o().add("TextView.align");
+        new aa.a().a("TextView added to layout").a(aa.d);
+    }
+
+    void d(af afVar) {
+        JSONObject jSONObjectC = afVar.c();
+        this.n = y.c(jSONObjectC, "x");
+        this.o = y.c(jSONObjectC, "y");
+        this.p = y.c(jSONObjectC, "width");
+        this.q = y.c(jSONObjectC, "height");
+        FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) getLayoutParams();
+        layoutParams.setMargins(this.n, this.o, 0, 0);
+        layoutParams.width = this.p;
+        layoutParams.height = this.q;
+        setLayoutParams(layoutParams);
+    }
+
+    void e(af afVar) {
+        this.w = y.b(afVar.c(), "background_color");
+        setBackgroundColor(aw.g(this.w));
+    }
+
+    void f(af afVar) {
+        this.x = y.b(afVar.c(), "font_color");
+        setTextColor(aw.g(this.x));
+    }
+
+    void g(af afVar) {
+        this.t = y.c(afVar.c(), "font_size");
+        setTextSize(this.t);
+    }
+
+    void h(af afVar) {
+        int iC = y.c(afVar.c(), "font_style");
+        this.r = iC;
+        if (iC == 0) {
+            setTypeface(getTypeface(), 0);
+            return;
+        }
+        if (iC == 1) {
+            setTypeface(getTypeface(), 1);
+        } else if (iC == 2) {
+            setTypeface(getTypeface(), 2);
+        } else {
+            if (iC != 3) {
+                return;
+            }
+            setTypeface(getTypeface(), 3);
+        }
+    }
+
+    void i(af afVar) {
+        this.y = y.b(afVar.c(), MimeTypes.BASE_TYPE_TEXT);
+        setText(this.y);
+    }
+
+    void j(af afVar) {
+        int iC = y.c(afVar.c(), "font_family");
+        this.s = iC;
+        if (iC == 0) {
+            setTypeface(Typeface.DEFAULT);
+            return;
+        }
+        if (iC == 1) {
+            setTypeface(Typeface.SERIF);
+        } else if (iC == 2) {
+            setTypeface(Typeface.SANS_SERIF);
+        } else {
+            if (iC != 3) {
+                return;
+            }
+            setTypeface(Typeface.MONOSPACE);
+        }
+    }
+
+    void k(af afVar) {
+        if (y.d(afVar.c(), "visible")) {
+            setVisibility(0);
+        } else {
+            setVisibility(4);
+        }
+    }
+}

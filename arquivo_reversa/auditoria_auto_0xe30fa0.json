@@ -1,0 +1,11 @@
+{
+  "endereco": "0xe30fa0",
+  "raiz_funcao": "0xe30fa0",
+  "fim_funcao": "0xe31018",
+  "total_chamadores": 3,
+  "chamadores": [
+    "0xc56c04",
+    "0xcf9fb8",
+    "0xd98a20"
+  ]
+}

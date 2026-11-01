@@ -1,0 +1,48 @@
+
+meleefish1.png
+size: 138,255
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+meleefish_body
+  rotate: false
+  xy: 0, 131
+  size: 138, 124
+  orig: 138, 124
+  offset: 0, 0
+  index: -1
+meleefish_fin
+  rotate: false
+  xy: 98, 89
+  size: 34, 42
+  orig: 34, 42
+  offset: 0, 0
+  index: -1
+meleefish_jaw
+  rotate: false
+  xy: 0, 78
+  size: 98, 53
+  orig: 98, 53
+  offset: 0, 0
+  index: -1
+meleefish_mouth-inside
+  rotate: false
+  xy: 0, 36
+  size: 86, 42
+  orig: 86, 42
+  offset: 0, 0
+  index: -1
+meleefish_pupil
+  rotate: false
+  xy: 132, 125
+  size: 4, 6
+  orig: 4, 6
+  offset: 0, 0
+  index: -1
+meleefish_tail
+  rotate: false
+  xy: 86, 0
+  size: 42, 78
+  orig: 42, 78
+  offset: 0, 0
+  index: -1

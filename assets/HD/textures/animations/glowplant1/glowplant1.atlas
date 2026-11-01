@@ -1,0 +1,20 @@
+
+glowplant1.png
+size: 288,212
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+glowplant
+  rotate: false
+  xy: 0, 0
+  size: 212, 212
+  orig: 212, 212
+  offset: 0, 0
+  index: -1
+glowplant_glow
+  rotate: false
+  xy: 212, 139
+  size: 76, 73
+  orig: 76, 73
+  offset: 0, 0
+  index: -1

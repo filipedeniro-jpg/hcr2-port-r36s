@@ -1,0 +1,6 @@
+*.o
+*.d
+*.tmp
+*.bak
+salvar_no_github.bat.bak
+

@@ -1,0 +1,20 @@
+
+tube-gate-pipes.png
+size: 149,88
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+bubble
+  rotate: false
+  xy: 115, 54
+  size: 34, 34
+  orig: 34, 34
+  offset: 0, 0
+  index: -1
+pipes
+  rotate: false
+  xy: 0, 0
+  size: 115, 88
+  orig: 115, 88
+  offset: 0, 0
+  index: -1

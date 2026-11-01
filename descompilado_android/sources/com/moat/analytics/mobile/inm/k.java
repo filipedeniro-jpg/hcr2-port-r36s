@@ -1,0 +1,113 @@
+package com.moat.analytics.mobile.inm;
+
+import android.app.Application;
+import android.content.Context;
+import androidx.annotation.Nullable;
+import androidx.annotation.UiThread;
+import java.lang.ref.WeakReference;
+
+/* JADX INFO: loaded from: classes2.dex */
+class k extends MoatAnalytics implements w.b {
+
+    @Nullable
+    g d;
+    WeakReference<Context> e;
+    private String g;
+    private MoatOptions h;
+    boolean a = false;
+    boolean b = false;
+    boolean c = false;
+    private boolean f = false;
+
+    k() {
+    }
+
+    private void a(MoatOptions moatOptions, Application application) throws m {
+        if (this.f) {
+            p.a(3, "Analytics", this, "Moat SDK has already been started.");
+            return;
+        }
+        this.h = moatOptions;
+        w.a().b();
+        this.c = moatOptions.disableLocationServices;
+        if (application == null) {
+            throw new m("Moat Analytics SDK didn't start, application was null");
+        }
+        if (moatOptions.loggingEnabled && s.b(application.getApplicationContext())) {
+            this.a = true;
+        }
+        this.e = new WeakReference<>(application.getApplicationContext());
+        this.f = true;
+        this.b = moatOptions.autoTrackGMAInterstitials;
+        a.a(application);
+        w.a().a(this);
+        if (!moatOptions.disableAdIdCollection) {
+            s.a(application);
+        }
+        p.a("[SUCCESS] ", "Moat Analytics SDK Version 2.5.0 started");
+    }
+
+    @UiThread
+    private void e() {
+        if (this.d == null) {
+            this.d = new g(a.a(), g.a.DISPLAY);
+            this.d.a(this.g);
+            p.a(3, "Analytics", this, "Preparing native display tracking with partner code " + this.g);
+            p.a("[SUCCESS] ", "Prepared for native display tracking with partner code " + this.g);
+        }
+    }
+
+    boolean a() {
+        return this.f;
+    }
+
+    boolean b() {
+        MoatOptions moatOptions = this.h;
+        return moatOptions != null && moatOptions.disableLocationServices;
+    }
+
+    @Override // com.moat.analytics.mobile.inm.w.b
+    public void c() {
+        m.a();
+        o.a();
+        if (this.g != null) {
+            try {
+                e();
+            } catch (Exception e) {
+                m.a(e);
+            }
+        }
+    }
+
+    @Override // com.moat.analytics.mobile.inm.w.b
+    public void d() {
+    }
+
+    @Override // com.moat.analytics.mobile.inm.MoatAnalytics
+    @UiThread
+    public void prepareNativeDisplayTracking(String str) {
+        this.g = str;
+        if (w.a().a == w.d.OFF) {
+            return;
+        }
+        try {
+            e();
+        } catch (Exception e) {
+            m.a(e);
+        }
+    }
+
+    @Override // com.moat.analytics.mobile.inm.MoatAnalytics
+    public void start(Application application) {
+        start(new MoatOptions(), application);
+    }
+
+    @Override // com.moat.analytics.mobile.inm.MoatAnalytics
+    public void start(MoatOptions moatOptions, Application application) {
+        try {
+            a(moatOptions, application);
+        } catch (Exception e) {
+            m.a(e);
+        }
+    }
+}

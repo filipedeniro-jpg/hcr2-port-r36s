@@ -1,0 +1,18 @@
+{
+  "endereco": "0xd93c58",
+  "raiz_funcao": "0xd93be4",
+  "fim_funcao": "0xd93c94",
+  "total_chamadores": 10,
+  "chamadores": [
+    "0xc05530",
+    "0xc055ec",
+    "0xc06d4c",
+    "0xc06ec0",
+    "0xc0973c",
+    "0xc0979c",
+    "0xc0a274",
+    "0xd1c720",
+    "0xd1d2a0",
+    "0xd1e2e8"
+  ]
+}

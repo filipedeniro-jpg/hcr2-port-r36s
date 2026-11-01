@@ -1,0 +1,51 @@
+{
+"skeleton": { "hash": "2xJ3f0bSxVtRbYWXYFhRv8d9FoA", "spine": "3.6.53", "width": 258.87, "height": 258.87 },
+"bones": [
+	{ "name": "root" }
+],
+"slots": [
+	{ "name": "car-bubble", "bone": "root", "attachment": "car-bubble" }
+],
+"skins": {
+	"default": {
+		"car-bubble": {
+			"car-bubble": { "scaleX": 1.011, "scaleY": 1.011, "width": 256, "height": 256 }
+		}
+	}
+},
+"animations": {
+	"default": {
+		"bones": {
+			"root": {
+				"scale": [
+					{
+						"time": 0,
+						"x": 1,
+						"y": 1,
+						"curve": [ 0.544, 0.55, 0.684, 1.01 ]
+					},
+					{
+						"time": 0.5,
+						"x": 1.03,
+						"y": 0.97,
+						"curve": [ 0.25, 0, 0.696, 0.69 ]
+					},
+					{
+						"time": 1,
+						"x": 1,
+						"y": 1,
+						"curve": [ 0.541, 0.53, 0.75, 1 ]
+					},
+					{
+						"time": 1.5,
+						"x": 0.97,
+						"y": 1.03,
+						"curve": [ 0.25, 0, 0.622, 0.62 ]
+					},
+					{ "time": 2, "x": 1, "y": 1 }
+				]
+			}
+		}
+	}
+}
+}

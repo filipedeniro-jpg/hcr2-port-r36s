@@ -1,0 +1,52 @@
+{
+"skeleton": { "hash": "Jqf7NqTxNZ4CQAS6OdqGigx643w", "spine": "3.6.53", "width": 662.25, "height": 684 },
+"bones": [
+	{ "name": "root" },
+	{ "name": "bone", "parent": "root", "length": 84.53, "rotation": -136.88, "x": -70.94, "y": 434.89 }
+],
+"slots": [
+	{ "name": "gate-front", "bone": "root", "attachment": "gate-front" },
+	{ "name": "lamp", "bone": "bone", "attachment": "lamp" },
+	{ "name": "beam", "bone": "bone", "color": "ffffff39", "attachment": "beam", "blend": "additive" }
+],
+"skins": {
+	"default": {
+		"beam": {
+			"beam": { "x": 212.26, "y": 4.22, "scaleX": 2, "scaleY": 2, "rotation": 90.81, "width": 122, "height": 190 }
+		},
+		"gate-front": {
+			"gate-front": { "x": 46.77, "y": 173.19, "scaleX": 2, "scaleY": 2, "width": 171, "height": 342 }
+		},
+		"lamp": {
+			"lamp": { "x": 30.28, "y": 1.16, "scaleX": 2, "scaleY": 2, "rotation": 90.81, "width": 43, "height": 37 }
+		}
+	}
+},
+"animations": {
+	"default": {
+		"bones": {
+			"bone": {
+				"rotate": [
+					{
+						"time": 0,
+						"angle": 0,
+						"curve": [ 0.574, 0.57, 0.75, 1 ]
+					},
+					{
+						"time": 0.8,
+						"angle": -23.52,
+						"curve": [ 0.25, 0, 0.75, 1 ]
+					},
+					{
+						"time": 2.6333,
+						"angle": 28.06,
+						"curve": [ 0.25, 0, 0.406, 0.4 ]
+					},
+					{ "time": 3.3333, "angle": 0 }
+				]
+			}
+		}
+	},
+	"pipe-bubbles": {}
+}
+}

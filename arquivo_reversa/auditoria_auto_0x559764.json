@@ -1,0 +1,32 @@
+{
+  "endereco": "0x559764",
+  "raiz_funcao": "0x559494",
+  "fim_funcao": "0x559764",
+  "total_chamadores": 24,
+  "chamadores": [
+    "0x5591c4",
+    "0x55a444",
+    "0x5fac24",
+    "0x5fc4d8",
+    "0x5fca58",
+    "0x5fcddc",
+    "0x5fd4e4",
+    "0x5fd92c",
+    "0x6abaec",
+    "0x6abe8c",
+    "0x6ad04c",
+    "0x6ad364",
+    "0x6ad63c",
+    "0x6ad990",
+    "0x6fd164",
+    "0x9adbb4",
+    "0x9adce4",
+    "0x9addf4",
+    "0x9af300",
+    "0x9b04f4",
+    "0xa6fea8",
+    "0xa700e8",
+    "0xa7092c",
+    "0xb8069c"
+  ]
+}

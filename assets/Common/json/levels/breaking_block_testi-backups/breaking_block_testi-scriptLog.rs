@@ -1,0 +1,16 @@
+getObject(1).deselect();
+getObject(1).select();
+getObject(1).setPosition(2.0009,0.996409);
+getObject(1).deselect();
+addBody(1, '{"awake":true,"type":"dynamic"}');
+getBody(1).setPosition(1.0009,0.996409);
+getBody(1).setPosition(0,0);getBody(1).delete();
+setCursor(-4.13375, 0.16158);
+addBody(2, '{"awake":true,"type":"dynamic"}');
+getBody(2).setPosition(-4.13375,0.16158);
+getBody(2).select();
+getBody(2).deselect();
+getBody(2).select();
+getBody(2).addFixture(1, '{"density":1,"shapes":[{"radius":0,"type":"polygon"}],"friction":0.2,"vertices":{"x":[0.5,0.154509,-0.404509,-0.404509,0.154509],"y":[0,0.475528,0.293893,-0.293893,-0.475528]}}');
+getFixture(1).select();
+getFixture(1).deselect();

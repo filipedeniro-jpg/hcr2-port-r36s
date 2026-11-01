@@ -1,0 +1,17 @@
+package com.google.android.gms.internal.ads;
+
+import java.io.IOException;
+
+/* JADX INFO: compiled from: com.google.android.gms:play-services-ads@@18.1.1 */
+/* JADX INFO: loaded from: classes2.dex */
+public final class zzdtt extends IOException {
+    zzdtt(int i, int i2) {
+        StringBuilder sb = new StringBuilder(108);
+        sb.append("CodedOutputStream was writing to a flat byte array and ran out of space (pos ");
+        sb.append(i);
+        sb.append(" limit ");
+        sb.append(i2);
+        sb.append(").");
+        super(sb.toString());
+    }
+}

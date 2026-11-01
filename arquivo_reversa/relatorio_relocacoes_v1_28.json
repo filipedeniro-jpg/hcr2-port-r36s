@@ -1,0 +1,36 @@
+{
+  "secoes_principais": {
+    ".init_array": {
+      "tipo": 14,
+      "flags": "0x3",
+      "endereco": "0x164a478",
+      "offset": "0x163a478",
+      "tamanho": 3936
+    },
+    ".rela.dyn": {
+      "tipo": 4,
+      "flags": "0x2",
+      "endereco": "0x5e748",
+      "offset": "0x5e748",
+      "tamanho": 3031104
+    },
+    ".dynamic": {
+      "tipo": 6,
+      "flags": "0x3",
+      "endereco": "0x1762db0",
+      "offset": "0x1752db0",
+      "tamanho": 560
+    }
+  },
+  "tags_dinamicas": {
+    "DT_INIT_ARRAY": "0x164a478",
+    "DT_INIT_ARRAYSZ": "0xf60",
+    "DT_STRSZ": "0x26b9b",
+    "DT_RELA": "0x5e748",
+    "DT_RELASZ": "0x2e4040",
+    "DT_RELAENT": "0x18",
+    "DT_RELACOUNT": "0x1c26e"
+  },
+  "relocs_na_init_array": 491,
+  "total_entradas_init_array": 492
+}

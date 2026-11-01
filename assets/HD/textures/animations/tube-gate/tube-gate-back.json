@@ -1,0 +1,19 @@
+{
+"skeleton": { "hash": "3+gfecKgjseAHnMiHqRMAzg8juU", "spine": "3.6.53", "width": 322, "height": 584 },
+"bones": [
+	{ "name": "root" }
+],
+"slots": [
+	{ "name": "gate-back", "bone": "root", "attachment": "gate-back" }
+],
+"skins": {
+	"default": {
+		"gate-back": {
+			"gate-back": { "x": -132.26, "y": 168.2, "scaleX": 2, "scaleY": 2, "width": 161, "height": 292 }
+		}
+	}
+},
+"animations": {
+	"default": {}
+}
+}

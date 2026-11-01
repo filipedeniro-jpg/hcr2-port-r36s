@@ -1,0 +1,18 @@
+{
+  "endereco": "0x533800",
+  "raiz_funcao": "0x533408",
+  "fim_funcao": "0x533800",
+  "total_chamadores": 10,
+  "chamadores": [
+    "0x53339c",
+    "0x535ed8",
+    "0x539f18",
+    "0x53c1f0",
+    "0xa1eb90",
+    "0xa1ed14",
+    "0xa1ed60",
+    "0xa1edcc",
+    "0xa1ee20",
+    "0xae8678"
+  ]
+}

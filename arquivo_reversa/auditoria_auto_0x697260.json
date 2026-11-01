@@ -1,0 +1,9 @@
+{
+  "endereco": "0x697260",
+  "raiz_funcao": "0x697260",
+  "fim_funcao": "0x6973c4",
+  "total_chamadores": 1,
+  "chamadores": [
+    "0x69686c"
+  ]
+}

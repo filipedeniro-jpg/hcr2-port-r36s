@@ -1,0 +1,174 @@
+[
+  {
+    "linha": 127,
+    "assinatura": "public static native int getTimeStampNow();"
+  },
+  {
+    "linha": 129,
+    "assinatura": "public static native int getVideoGroupCount();"
+  },
+  {
+    "linha": 131,
+    "assinatura": "public static native void handleAppLink(String str, String str2);"
+  },
+  {
+    "linha": 136,
+    "assinatura": "public static native boolean isMyGamezBuild();"
+  },
+  {
+    "linha": 138,
+    "assinatura": "public static native boolean isSubscriptionAutoRenew();"
+  },
+  {
+    "linha": 140,
+    "assinatura": "public static native boolean isSubscriptionExpired();"
+  },
+  {
+    "linha": 142,
+    "assinatura": "public static native void notifyInterstitialDismissed();"
+  },
+  {
+    "linha": 144,
+    "assinatura": "public static native void notifyInterstitialFailed();"
+  },
+  {
+    "linha": 146,
+    "assinatura": "public static native void notifyInterstitialInteract();"
+  },
+  {
+    "linha": 148,
+    "assinatura": "public static native void notifyInterstitialLoaded();"
+  },
+  {
+    "linha": 150,
+    "assinatura": "public static native void notifyInterstitialShow();"
+  },
+  {
+    "linha": 152,
+    "assinatura": "public static native void notifyVideoAdCanceled();"
+  },
+  {
+    "linha": 154,
+    "assinatura": "public static native void notifyVideoAdCompleted();"
+  },
+  {
+    "linha": 156,
+    "assinatura": "public static native void notifyVideoAdFailed();"
+  },
+  {
+    "linha": 158,
+    "assinatura": "public static native void notifyVideoAdStarted(String str);"
+  },
+  {
+    "linha": 160,
+    "assinatura": "public static native void onAdSettingsReceived();"
+  },
+  {
+    "linha": 162,
+    "assinatura": "public static native void onAllIapPricesUpdated();"
+  },
+  {
+    "linha": 164,
+    "assinatura": "public static native void onConfigurationCompleted();"
+  },
+  {
+    "linha": 166,
+    "assinatura": "public static native void onDataRead(boolean z, int i, int i2, String str, String str2, int i3);"
+  },
+  {
+    "linha": 168,
+    "assinatura": "public static native void onDataWrite(boolean z);"
+  },
+  {
+    "linha": 170,
+    "assinatura": "public static native void onFirebaseRemoteConfigReceived();"
+  },
+  {
+    "linha": 172,
+    "assinatura": "public static native void onFriendDataRead(int i, Friend[] friendArr);"
+  },
+  {
+    "linha": 174,
+    "assinatura": "public static native void onGameServicesConnected();"
+  },
+  {
+    "linha": 176,
+    "assinatura": "public static native void onGameServicesFailed();"
+  },
+  {
+    "linha": 178,
+    "assinatura": "public static native void onGameServicesManualDisconnect();"
+  },
+  {
+    "linha": 180,
+    "assinatura": "public static native void onIMEActive(float f);"
+  },
+  {
+    "linha": 182,
+    "assinatura": "public static native void onIapCancelled(String str);"
+  },
+  {
+    "linha": 184,
+    "assinatura": "public static native void onIapError(String str, String str2);"
+  },
+  {
+    "linha": 186,
+    "assinatura": "public static native void onIapPriceUpdate(String str, long j, String str2, String str3);"
+  },
+  {
+    "linha": 188,
+    "assinatura": "public static native void onIapPurchased(String str, String str2);"
+  },
+  {
+    "linha": 190,
+    "assinatura": "public static native void onIapValidationFailed(String str, String str2, String str3);"
+  },
+  {
+    "linha": 192,
+    "assinatura": "public static native void onIapValidationSuccess(String str, String str2, boolean z);"
+  },
+  {
+    "linha": 194,
+    "assinatura": "public static native void onJsonReceived(String str, String str2);"
+  },
+  {
+    "linha": 196,
+    "assinatura": "public static native void onLoginCancel();"
+  },
+  {
+    "linha": 198,
+    "assinatura": "public static native void onLoginError();"
+  },
+  {
+    "linha": 200,
+    "assinatura": "public static native void onLoginSuccess(int i);"
+  },
+  {
+    "linha": 202,
+    "assinatura": "public static native void onLogout();"
+  },
+  {
+    "linha": 204,
+    "assinatura": "public static native void onNetworkConnectivityChanged(boolean z);"
+  },
+  {
+    "linha": 206,
+    "assinatura": "public static native void onNewsDataAvailable(String str, int i);"
+  },
+  {
+    "linha": 208,
+    "assinatura": "public static native void onRetryConnectionClicked();"
+  },
+  {
+    "linha": 210,
+    "assinatura": "public static native void onSubscriptionExpired();"
+  },
+  {
+    "linha": 212,
+    "assinatura": "public static native void onSubscriptionInactive(String str);"
+  },
+  {
+    "linha": 214,
+    "assinatura": "public static native void onSubscriptionValidated(String str, String str2, long j, boolean z, boolean z2);"
+  }
+]

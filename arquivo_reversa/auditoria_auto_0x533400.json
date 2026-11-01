@@ -1,0 +1,11 @@
+{
+  "endereco": "0x533400",
+  "raiz_funcao": "0x53326c",
+  "fim_funcao": "0x533400",
+  "total_chamadores": 3,
+  "chamadores": [
+    "0x53c680",
+    "0x53c6a0",
+    "0x53c794"
+  ]
+}

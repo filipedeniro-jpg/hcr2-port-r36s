@@ -1,0 +1,614 @@
+{
+  "content_scale": 1.0,
+  "armature_data": [
+    {
+      "strVersion": "1.6.0.0",
+      "version": 1.6,
+      "name": "VultureAnimation",
+      "bone_data": [
+        {
+          "name": "Body",
+          "parent": "",
+          "dI": 0,
+          "x": 7.710906982421875,
+          "y": -2.8681087493896484,
+          "z": 2,
+          "cX": 1.0,
+          "cY": 1.0,
+          "kX": 0.0,
+          "kY": 0.0,
+          "arrow_x": 0.0,
+          "arrow_y": 0.0,
+          "effectbyskeleton": false,
+          "bl": 0,
+          "display_data": [
+            {
+              "name": "VultureAnim/Body.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 0.0,
+                  "y": 0.0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Neck",
+          "parent": "",
+          "dI": 0,
+          "x": -60.229312896728516,
+          "y": 149.03282165527344,
+          "z": 4,
+          "cX": 1.0,
+          "cY": 1.0,
+          "kX": -2.91655445,
+          "kY": 2.91655445,
+          "arrow_x": 65.497596740722656,
+          "arrow_y": 6.8207191361580044E-06,
+          "effectbyskeleton": true,
+          "bl": 65,
+          "display_data": [
+            {
+              "name": "VultureAnim/neck.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 29.0319672,
+                  "y": 23.2511673,
+                  "cX": 1.00000012,
+                  "cY": 1.00000012,
+                  "kX": 2.9165535,
+                  "kY": -2.9165535
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Head",
+          "parent": "Neck",
+          "dI": 0,
+          "x": 61.513603210449219,
+          "y": -3.2794189453125,
+          "z": 6,
+          "cX": 1.0,
+          "cY": 1.0,
+          "kX": 1.27215862,
+          "kY": -1.27215862,
+          "arrow_x": 167.37626647949219,
+          "arrow_y": -8.0939142208080739E-05,
+          "effectbyskeleton": true,
+          "bl": 167,
+          "display_data": [
+            {
+              "name": "VultureAnim/head.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 83.28827,
+                  "y": -85.6052,
+                  "cX": 1.00000012,
+                  "cY": 1.00000012,
+                  "kX": 1.644395,
+                  "kY": -1.644395
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Beak",
+          "parent": "Head",
+          "dI": 0,
+          "x": 56.814956665039062,
+          "y": -55.867485046386719,
+          "z": 5,
+          "cX": 1.0,
+          "cY": 1.0,
+          "kX": 1.90561438,
+          "kY": -1.90561438,
+          "arrow_x": 80.4205551147461,
+          "arrow_y": -2.481649789842777E-05,
+          "effectbyskeleton": true,
+          "bl": 80,
+          "display_data": [
+            {
+              "name": "VultureAnim/beak.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 46.83535,
+                  "y": 7.02648926,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": -0.261219382,
+                  "kY": 0.2612185
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "F Wing",
+          "parent": "",
+          "dI": 0,
+          "x": 46.693748474121094,
+          "y": 153.648193359375,
+          "z": 3,
+          "cX": 1.0,
+          "cY": 1.0,
+          "kX": 1.23605955,
+          "kY": -1.23605955,
+          "arrow_x": 299.71182250976562,
+          "arrow_y": -1.1927480954909697E-05,
+          "effectbyskeleton": true,
+          "bl": 299,
+          "display_data": [
+            {
+              "name": "VultureAnim/F-Wing.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 152.157822,
+                  "y": -8.534401,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": -1.23606169,
+                  "kY": 1.23605835
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "B Wing",
+          "parent": "",
+          "dI": 0,
+          "x": -101.76776885986328,
+          "y": 175.95588684082031,
+          "z": 1,
+          "cX": 1.0,
+          "cY": 1.0,
+          "kX": 1.56281781,
+          "kY": -1.56281781,
+          "arrow_x": 289.23992919921875,
+          "arrow_y": -2.2965998141444288E-05,
+          "effectbyskeleton": true,
+          "bl": 289,
+          "display_data": [
+            {
+              "name": "VultureAnim/Bwing.png",
+              "displayType": 0,
+              "skin_data": [
+                {
+                  "x": 165.011414,
+                  "y": -22.7478256,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": -1.56281769,
+                  "kY": 1.5628159
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "animation_data": [
+    {
+      "name": "VultureAnimation",
+      "mov_data": [
+        {
+          "name": "Animation1",
+          "dr": 76,
+          "lp": true,
+          "to": 0,
+          "drTW": 0,
+          "twE": 0,
+          "sc": 1.0,
+          "mov_bone_data": [
+            {
+              "name": "Head",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.108892068,
+                  "kY": -0.108892068,
+                  "fi": 35,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 75,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            },
+            {
+              "name": "Beak",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.4864856,
+                  "kY": -0.4864856,
+                  "fi": 35,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 55,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.4864856,
+                  "kY": -0.4864856,
+                  "fi": 60,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 65,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.4864856,
+                  "kY": -0.4864856,
+                  "fi": 70,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 75,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            },
+            {
+              "name": "Body",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            },
+            {
+              "name": "Neck",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": -1.81817626953125,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.194252476,
+                  "kY": -0.194252476,
+                  "fi": 35,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 75,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            },
+            {
+              "name": "F Wing",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": -0.90909194946289062,
+                  "y": 9.9999923706054688,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": -0.101194516,
+                  "kY": 0.101194516,
+                  "fi": 35,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 75,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            },
+            {
+              "name": "B Wing",
+              "dl": 0.0,
+              "frame_data": [
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 0,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 2.7272720336914062,
+                  "y": 13.636360168457031,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.1433341,
+                  "kY": -0.1433341,
+                  "fi": 35,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                },
+                {
+                  "dI": 0,
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0,
+                  "cX": 1.0,
+                  "cY": 1.0,
+                  "kX": 0.0,
+                  "kY": 0.0,
+                  "fi": 75,
+                  "twE": 0,
+                  "tweenFrame": true,
+                  "bd_src": 1,
+                  "bd_dst": 771
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "texture_data": [
+    {
+      "name": "VultureAnim/neck",
+      "width": 101.0,
+      "height": 100.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "VultureAnim/beak",
+      "width": 116.0,
+      "height": 50.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "VultureAnim/Body",
+      "width": 268.0,
+      "height": 458.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "VultureAnim/Bwing",
+      "width": 99.0,
+      "height": 345.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "VultureAnim/head",
+      "width": 244.0,
+      "height": 200.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    },
+    {
+      "name": "VultureAnim/F-Wing",
+      "width": 167.0,
+      "height": 376.0,
+      "pX": 0.5,
+      "pY": 0.5,
+      "plistFile": ""
+    }
+  ],
+  "config_file_path": [
+    "VultureAnimation0.plist"
+  ],
+  "config_png_path": [
+    "VultureAnimation0.png"
+  ]
+}
