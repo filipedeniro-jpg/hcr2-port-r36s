@@ -25,6 +25,23 @@ static int s_tecla_fn_ativa = 0;
 
 extern int g_is_in_game;
 
+static void pausar_jogo_start(void) {
+  static uint32_t s_ultimo_start = 0;
+  uint32_t agora = SDL_GetTicks();
+  if (agora - s_ultimo_start > 350) {
+    s_ultimo_start = agora;
+    printf("[CONTROLES] START acionado! Despachando nativeKeyEvent(AKEYCODE_BACK=4) e toque no botao Pause...\n");
+    fflush(stdout);
+    if (nativeKeyEvent) {
+      nativeKeyEvent(fake_env, renderer_cls, CODIGO_BOTAO_VOLTAR, 1);
+      nativeKeyEvent(fake_env, renderer_cls, CODIGO_BOTAO_VOLTAR, 0);
+    } else if (nativeKeyDown) {
+      nativeKeyDown(fake_env, renderer_cls, CODIGO_BOTAO_VOLTAR);
+    }
+    toque_virtual_acionar_pause();
+  }
+}
+
 void controles_r36s_init(void) {
   if (SDL_GameControllerAddMappingsFromFile("gamecontrollerdb.txt") > 0) {
     printf("[HCR] Base gamecontrollerdb.txt carregada com sucesso.\n");
@@ -75,46 +92,70 @@ void update_input(void) {
       }
 
       int btn = ev.cbutton.button;
-      if (!g_is_in_game && (btn == config.btn_click || btn == config.btn_gas)) {
-        s_clique_pressionado = 1;
-      } else {
-        if (btn == config.btn_gas)   s_gas_pressionado = 1;
-        if (btn == config.btn_click) s_clique_pressionado = 1;
+      if (btn == config.btn_gas || btn == SDL_CONTROLLER_BUTTON_A || btn == SDL_CONTROLLER_BUTTON_RIGHTSHOULDER) {
+        s_gas_pressionado = 1;
       }
-      if (btn == config.btn_brake) s_freio_pressionado = 1;
+      if (btn == config.btn_click || btn == SDL_CONTROLLER_BUTTON_B) {
+        s_clique_pressionado = 1;
+      }
+      if (btn == config.btn_brake || btn == SDL_CONTROLLER_BUTTON_Y || btn == SDL_CONTROLLER_BUTTON_LEFTSHOULDER) {
+        s_freio_pressionado = 1;
+      }
+      if (btn == SDL_CONTROLLER_BUTTON_DPAD_RIGHT) s_gas_pressionado = 1;
+      if (btn == SDL_CONTROLLER_BUTTON_DPAD_LEFT)  s_freio_pressionado = 1;
+
       if (btn == config.btn_boost && nativeHcrControllerKeyEvent) {
         nativeHcrControllerKeyEvent(fake_env, renderer_cls, CODIGO_BOTAO_X, 1);
       }
-      if (btn == SDL_CONTROLLER_BUTTON_RIGHTSHOULDER) s_gas_pressionado = 1;
-      if (btn == SDL_CONTROLLER_BUTTON_LEFTSHOULDER)  s_freio_pressionado = 1;
+      if ((btn == config.btn_pause || btn == SDL_CONTROLLER_BUTTON_START) && !s_tecla_fn_ativa) {
+        pausar_jogo_start();
+      }
       if (btn == SDL_CONTROLLER_BUTTON_BACK) freeshop_add_cheat_money();
     } else if (ev.type == SDL_CONTROLLERBUTTONUP) {
       if (ev.cbutton.button == SDL_CONTROLLER_BUTTON_BACK || ev.cbutton.button == SDL_CONTROLLER_BUTTON_GUIDE) {
         s_tecla_fn_ativa = 0;
       }
       int btn = ev.cbutton.button;
-      if (btn == config.btn_gas) {
+      if (btn == config.btn_gas || btn == SDL_CONTROLLER_BUTTON_A || btn == SDL_CONTROLLER_BUTTON_RIGHTSHOULDER) {
         s_gas_pressionado = 0;
-        if (!g_is_in_game) s_clique_pressionado = 0;
       }
-      if (btn == config.btn_click) s_clique_pressionado = 0;
-      if (btn == config.btn_brake) s_freio_pressionado = 0;
+      if (btn == config.btn_click || btn == SDL_CONTROLLER_BUTTON_B) {
+        s_clique_pressionado = 0;
+      }
+      if (btn == config.btn_brake || btn == SDL_CONTROLLER_BUTTON_Y || btn == SDL_CONTROLLER_BUTTON_LEFTSHOULDER) {
+        s_freio_pressionado = 0;
+      }
+      if (btn == SDL_CONTROLLER_BUTTON_DPAD_RIGHT) s_gas_pressionado = 0;
+      if (btn == SDL_CONTROLLER_BUTTON_DPAD_LEFT)  s_freio_pressionado = 0;
+
       if (btn == config.btn_boost && nativeHcrControllerKeyEvent) {
         nativeHcrControllerKeyEvent(fake_env, renderer_cls, CODIGO_BOTAO_X, 0);
       }
-      if (btn == SDL_CONTROLLER_BUTTON_RIGHTSHOULDER) s_gas_pressionado = 0;
-      if (btn == SDL_CONTROLLER_BUTTON_LEFTSHOULDER)  s_freio_pressionado = 0;
     } else if (ev.type == SDL_CONTROLLERAXISMOTION) {
       if (ev.caxis.axis == SDL_CONTROLLER_AXIS_TRIGGERRIGHT) {
         s_gas_pressionado = (ev.caxis.value > 8000);
       } else if (ev.caxis.axis == SDL_CONTROLLER_AXIS_TRIGGERLEFT) {
         s_freio_pressionado = (ev.caxis.value > 8000);
+      } else if (ev.caxis.axis == SDL_CONTROLLER_AXIS_LEFTX) {
+        float lx = (float)ev.caxis.value / 32767.0f;
+        if (lx > 0.40f) s_gas_pressionado = 1;
+        else if (lx < -0.40f) s_freio_pressionado = 1;
+        else { s_gas_pressionado = 0; s_freio_pressionado = 0; }
       } else if (ev.caxis.axis == SDL_CONTROLLER_AXIS_RIGHTX) {
         float val = (float)ev.caxis.value / 32767.0f;
         s_rstick_x = (fabsf(val) > 0.25f) ? val : 0.0f;
       } else if (ev.caxis.axis == SDL_CONTROLLER_AXIS_RIGHTY) {
         float val = (float)ev.caxis.value / 32767.0f;
         s_rstick_y = (fabsf(val) > 0.25f) ? val : 0.0f;
+      }
+    } else if (ev.type == SDL_JOYHATMOTION) {
+      if (ev.jhat.value & SDL_HAT_RIGHT) {
+        s_gas_pressionado = 1;
+      } else if (ev.jhat.value & SDL_HAT_LEFT) {
+        s_freio_pressionado = 1;
+      } else {
+        s_gas_pressionado = 0;
+        s_freio_pressionado = 0;
       }
     } else if (ev.type == SDL_JOYBUTTONDOWN) {
       if (s_tem_gamecontroller) continue;
@@ -126,24 +167,28 @@ void update_input(void) {
         continue;
       }
       int btn = ev.jbutton.button;
-      if (btn == config.btn_gas)   s_gas_pressionado = 1;
-      if (btn == config.btn_click) s_clique_pressionado = 1;
-      if (btn == config.btn_brake) s_freio_pressionado = 1;
-      if (btn == 4 || btn == 8)    s_freio_pressionado = 1;
-      if (btn == 5 || btn == 9)    s_gas_pressionado = 1;
+      if (btn == config.btn_gas || btn == 0 || btn == 5 || btn == 9 || btn == 14) s_gas_pressionado = 1;
+      if (btn == config.btn_click || btn == 1)                                       s_clique_pressionado = 1;
+      if (btn == config.btn_brake || btn == 3 || btn == 4 || btn == 8 || btn == 13) s_freio_pressionado = 1;
+      if ((btn == config.btn_pause || btn == 7 || btn == 9) && !s_tecla_fn_ativa) {
+        pausar_jogo_start();
+      }
       if (btn == 6) freeshop_add_cheat_money();
     } else if (ev.type == SDL_JOYBUTTONUP) {
       if (s_tem_gamecontroller) continue;
       if (ev.jbutton.button == 6 || ev.jbutton.button == 10) s_tecla_fn_ativa = 0;
       int btn = ev.jbutton.button;
-      if (btn == config.btn_gas)   s_gas_pressionado = 0;
-      if (btn == config.btn_click) s_clique_pressionado = 0;
-      if (btn == config.btn_brake) s_freio_pressionado = 0;
-      if (btn == 4 || btn == 8)    s_freio_pressionado = 0;
-      if (btn == 5 || btn == 9)    s_gas_pressionado = 0;
+      if (btn == config.btn_gas || btn == 0 || btn == 5 || btn == 9 || btn == 14) s_gas_pressionado = 0;
+      if (btn == config.btn_click || btn == 1)                                       s_clique_pressionado = 0;
+      if (btn == config.btn_brake || btn == 3 || btn == 4 || btn == 8 || btn == 13) s_freio_pressionado = 0;
     } else if (ev.type == SDL_JOYAXISMOTION) {
       if (s_tem_gamecontroller) continue;
-      if (ev.jaxis.axis == 2) {
+      if (ev.jaxis.axis == 0) {
+        float lx = (float)ev.jaxis.value / 32767.0f;
+        if (lx > 0.40f) s_gas_pressionado = 1;
+        else if (lx < -0.40f) s_freio_pressionado = 1;
+        else { s_gas_pressionado = 0; s_freio_pressionado = 0; }
+      } else if (ev.jaxis.axis == 2) {
         float val = (float)ev.jaxis.value / 32767.0f;
         s_rstick_x = (fabsf(val) > 0.25f) ? val : 0.0f;
       } else if (ev.jaxis.axis == 3) {
@@ -172,13 +217,8 @@ void update_input(void) {
         s_clique_pressionado = 1;
       }
       if (ev.key.keysym.sym == SDLK_c) freeshop_add_cheat_money();
-      if (ev.key.keysym.sym == SDLK_ESCAPE) {
-        static uint32_t s_ultimo_esc = 0;
-        uint32_t agora = SDL_GetTicks();
-        if (agora - s_ultimo_esc > 350) {
-          s_ultimo_esc = agora;
-          if (nativeKeyDown) nativeKeyDown(fake_env, renderer_cls, CODIGO_BOTAO_VOLTAR);
-        }
+      if (ev.key.keysym.sym == SDLK_ESCAPE || ev.key.keysym.sym == SDLK_p || ev.key.keysym.sym == SDLK_PAUSE) {
+        pausar_jogo_start();
       }
     } else if (ev.type == SDL_KEYUP) {
       if (ev.key.keysym.sym == SDLK_RIGHT || ev.key.keysym.sym == SDLK_d) s_gas_pressionado = 0;

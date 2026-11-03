@@ -21,6 +21,7 @@ extern void (*nativeTouchesMove)(void *env, void *cls, void *ids, void *xs, void
 extern void (*nativeSetApkPath)(void *env, void *cls, void *caminho_apk);
 extern void (*nativeSetContext)(void *env, void *cls, void *contexto, void *asset_manager);
 extern void (*nativeKeyDown)(void *env, void *cls, int keycode);
+extern int  (*nativeKeyEvent)(void *env, void *cls, int keycode, int isPressed);
 extern void (*nativeOnRemoteConfigRead)(void *env, void *cls, int success);
 extern void (*nativeConsentInfoFinished)(void *env, void *cls);
 extern void (*nativeConsentFlowFinished)(void *env, void *cls);

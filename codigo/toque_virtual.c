@@ -20,6 +20,7 @@ float g_cursor_x = 320.0f;
 float g_cursor_y = 240.0f;
 float g_cursor_alpha = 1.0f;
 static int s_temporizador_cursor = 300;
+static int s_pause_contador = 0;
 
 static PonteiroToque s_toques_atuais[4] = {{0}};
 static void *s_array_ids = NULL;
@@ -28,6 +29,12 @@ static void *s_array_ys  = NULL;
 
 static float limitar_valor(float v, float min, float max) {
   return v < min ? min : (v > max ? max : v);
+}
+
+void toque_virtual_acionar_pause(void) {
+  s_pause_contador = 6;
+  printf("[CONTROLES PAUSE] Pulso de toque virtual no botao Pause ativado (6 quadros)!\n");
+  fflush(stdout);
 }
 
 void toque_virtual_init(void) {
@@ -81,18 +88,26 @@ void toque_virtual_processar(float dx, float dy, int clique, int freio, int gas)
     novos_toques[0].y = g_cursor_y;
   }
 
-  // [1] Pedal de freio (canto inferior esquerdo) - ativo SOMENTE em corrida
-  if (g_is_in_game && freio) {
+  // [1] Pedal de freio (canto inferior esquerdo)
+  if (freio) {
     novos_toques[1].ativo = 1;
-    novos_toques[1].x = screen_width * 0.16f;
-    novos_toques[1].y = screen_height * 0.82f;
+    novos_toques[1].x = screen_width * 0.14f;
+    novos_toques[1].y = screen_height * 0.83f;
   }
 
-  // [2] Pedal de acelerador (canto inferior direito) - ativo SOMENTE em corrida
-  if (g_is_in_game && gas) {
+  // [2] Pedal de acelerador (canto inferior direito)
+  if (gas) {
     novos_toques[2].ativo = 1;
-    novos_toques[2].x = screen_width * 0.84f;
-    novos_toques[2].y = screen_height * 0.82f;
+    novos_toques[2].x = screen_width * 0.86f;
+    novos_toques[2].y = screen_height * 0.83f;
+  }
+
+  // [3] Botao de Pause (canto superior direito do HUD: x~95.5%, y~6.7%)
+  if (s_pause_contador > 0) {
+    s_pause_contador--;
+    novos_toques[3].ativo = 1;
+    novos_toques[3].x = screen_width * 0.955f;
+    novos_toques[3].y = screen_height * 0.067f;
   }
 
   // Despacho de inicios de toque (nativeTouchesBegin)
@@ -101,8 +116,14 @@ void toque_virtual_processar(float dx, float dy, int clique, int freio, int gas)
       if (i == 0) {
         printf("[CONTROLES CLIQUE] Toque cursor Begin: x=%.1f, y=%.1f (Tela: %dx%d)\n",
                novos_toques[i].x, novos_toques[i].y, screen_width, screen_height);
-        fflush(stdout);
+      } else if (i == 1) {
+        printf("[CONTROLES PEDAL] Freio ATIVADO: x=%.1f, y=%.1f\n", novos_toques[i].x, novos_toques[i].y);
+      } else if (i == 2) {
+        printf("[CONTROLES PEDAL] Acelerador ATIVADO: x=%.1f, y=%.1f\n", novos_toques[i].x, novos_toques[i].y);
+      } else if (i == 3) {
+        printf("[CONTROLES PAUSE] Toque botao Pause ATIVADO: x=%.1f, y=%.1f\n", novos_toques[i].x, novos_toques[i].y);
       }
+      fflush(stdout);
       nativeTouchesBegin(fake_env, renderer_cls, i, novos_toques[i].x, novos_toques[i].y);
     }
   }
@@ -131,8 +152,14 @@ void toque_virtual_processar(float dx, float dy, int clique, int freio, int gas)
       if (i == 0) {
         printf("[CONTROLES CLIQUE] Toque cursor End: x=%.1f, y=%.1f\n",
                s_toques_atuais[i].x, s_toques_atuais[i].y);
-        fflush(stdout);
+      } else if (i == 1) {
+        printf("[CONTROLES PEDAL] Freio LIBERADO\n");
+      } else if (i == 2) {
+        printf("[CONTROLES PEDAL] Acelerador LIBERADO\n");
+      } else if (i == 3) {
+        printf("[CONTROLES PAUSE] Toque botao Pause LIBERADO\n");
       }
+      fflush(stdout);
       nativeTouchesEnd(fake_env, renderer_cls, i, s_toques_atuais[i].x, s_toques_atuais[i].y);
     }
   }

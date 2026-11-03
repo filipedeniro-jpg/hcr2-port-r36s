@@ -29,6 +29,7 @@ void (*nativeTouchesMove)(void *env, void *cls, void *ids, void *xs, void *ys) =
 void (*nativeSetApkPath)(void *env, void *cls, void *caminho_apk) = NULL;
 void (*nativeSetContext)(void *env, void *cls, void *contexto, void *asset_manager) = NULL;
 void (*nativeKeyDown)(void *env, void *cls, int keycode) = NULL;
+int  (*nativeKeyEvent)(void *env, void *cls, int keycode, int isPressed) = NULL;
 void (*nativeOnRemoteConfigRead)(void *env, void *cls, int success) = NULL;
 void (*nativeConsentInfoFinished)(void *env, void *cls) = NULL;
 void (*nativeConsentFlowFinished)(void *env, void *cls) = NULL;
@@ -85,6 +86,8 @@ void resolve_entry_points(so_module *mod) {
   RESOLVE_OPTIONAL(nativeTouchesMove, RN "nativeTouchesMove");
   RESOLVE_OPTIONAL(nativeSetApkPath, HN "nativeSetApkPath");
   RESOLVE_OPTIONAL(nativeSetContext, HN "nativeSetContext");
+  RESOLVE_OPTIONAL(nativeKeyEvent, RN "nativeKeyEvent");
+  RESOLVE_OPTIONAL(nativeKeyDown, RN "nativeKeyDown");
   
   // Metodos de transicao do Hill Climb Racing 2 (v1.28.2)
   RESOLVE_OPTIONAL(nativeOnConfigurationCompleted, "Java_com_fingersoft_hcr2_AppActivity_onConfigurationCompleted");

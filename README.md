@@ -5,7 +5,7 @@ Port nativo aarch64 do jogo **Hill Climb Racing 2 (v1.28.2)** executado diretame
 ---
 
 ## 📌 Versão Atual
-**Versão 1.6.0** (01/11/2026) - Controles calibrados sem drift, trava de clique anti-swipe no botão B e modularização SRP.
+**Versão 1.7.0** (03/11/2026) - Extrusão do solo subterrâneo, atalhos de captura manual e telemetria de referência Android.
 
 Para consultar o histórico detalhado de todas as versões e marcos, consulte o [CHANGELOG.md](CHANGELOG.md).
 

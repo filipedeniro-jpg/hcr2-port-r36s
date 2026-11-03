@@ -87,6 +87,14 @@ static void hook_terrain_draw(void *self, void *arg1, void *arg2) {
   void **p_tex_698 = (void **)((char *)self + 0x698);
   int solo_nativo_carregado = (*p_tex_698 != NULL);
 
+  // Ativa a textura de solo nativa verde-escuro (terrain-ground.png) no Passe 2
+  if (*(void **)((char *)self + 0x688) == NULL && *p_tex_698 != NULL) {
+    *(void **)((char *)self + 0x688) = *p_tex_698;
+  }
+  if (*p_tex_690 == NULL && *p_tex_698 != NULL) {
+    *p_tex_690 = *p_tex_698;
+  }
+
   void **p_prog_road = (void **)((char *)self + 0x6a0);
   void *prog_soil = *(void **)((char *)self + 0x6b8);
   if (!*p_prog_road && prog_soil) {

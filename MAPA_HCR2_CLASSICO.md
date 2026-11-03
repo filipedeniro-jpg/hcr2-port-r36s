@@ -32,7 +32,7 @@ Mapeados 100% offline via JADX (`hcr2_classico/descompilado_android/`):
 
 ## 🗂️ Estrutura de Arquivos do Novo Port (`hcr2_classico/`)
 - [README.md](file:///d:/Documentos/Ports%20R36S/hcr2_classico/README.md): Documentação geral do port e instruções do repositório
-- [CHANGELOG.md](file:///d:/Documentos/Ports%20R36S/hcr2_classico/CHANGELOG.md): Histórico oficial de versões (Versão atual: 1.6.0)
+- [CHANGELOG.md](file:///d:/Documentos/Ports%20R36S/hcr2_classico/CHANGELOG.md): Histórico oficial de versões (Versão atual: 1.7.0)
 - `salvar_no_github.bat`: Script em lote para commit e push automático do port para o GitHub
 - [scripts/01_adb_manager.bat](file:///d:/Documentos/Ports%20R36S/scripts/01_adb_manager.bat): Gerenciador ADB (pareamento Wi-Fi, conexão USB, instalação de APK e logcat)
 - [scripts/02_build_and_install.bat](file:///d:/Documentos/Ports%20R36S/scripts/02_build_and_install.bat): Instalador de APK multi-dispositivo Android
