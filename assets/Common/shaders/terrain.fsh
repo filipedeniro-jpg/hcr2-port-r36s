@@ -4,16 +4,8 @@ varying lowp vec4 v_texCoord_light_mul;
 varying vec4 v_texCoord_light_mul;
 #endif
 
-
-
-uniform sampler2D u_texture;
-
 void main()
 {
-	//gl_FragColor = vec4(v_texCoord_light_mul.xy, 0.0, 1.0);
-    gl_FragColor = texture2D(CC_Texture0, v_texCoord_light_mul.xy) * vec4(v_texCoord_light_mul.zzz, 1.0) * v_texCoord_light_mul.w;
-    //gl_FragColor = vec4(v_texCoord_light_mul.zzz, 1.0) * v_texCoord_light_mul.w;
-    //gl_FragColor = texture2D(CC_Texture0, v_texCoord_light_mul.xy) * v_texCoord_light_mul.w;
+    vec4 tex = texture2D(CC_Texture0, v_texCoord_light_mul.xy);
+    gl_FragColor = vec4(tex.rgb, 1.0);
 }
-
-

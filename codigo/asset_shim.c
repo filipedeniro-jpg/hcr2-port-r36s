@@ -1,15 +1,4 @@
-/* asset_shim.c -- NDK AAssetManager implemented over the SD-card assets/ tree
- *
- * This software may be modified and distributed under the terms
- * of the MIT license. See the LICENSE file for details.
- *
- * Cocos2d-x's FileUtilsAndroid reads everything under "assets/" through the NDK
- * AAssetManager. There is no such thing on Switch, so we back the whole API with
- * plain filesystem access rooted at ASSETS_DIR (extracted from hcr.apk). An AAsset is just a buffered FILE*; a "file descriptor"
- * asset (used by CRIWARE criFs and Cocos2dxHelper.getObbAssetFileDescriptor to
- * read .cpk ranges) is a real open() fd over the same file.
- */
-
+// asset_shim.c -- Emulacao de AAssetManager do NDK sobre o sistema de arquivos local
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -21,35 +10,17 @@
 #include "config.h"
 #include "asset_shim.h"
 
-// AASSET_MODE_* are just hints on Android; we ignore them.
-
-// Extracted assets are mostly small. A modest read-ahead avoids tiny SD reads
-// without allocating 128 KiB of stdio buffer for every simultaneously open
-// sound/helper asset.
 #define ASSET_READ_AHEAD (32 * 1024)
 
 struct AAssetManager { int _unused; };
 static AAssetManager g_manager;
 
-struct AAsset {
-  FILE *f;
-  long size;
-  char path[512];
-};
-
-struct AAssetDir {
-  DIR *dir;
-  char base[512];   // assets-relative dir prefix (with trailing '/')
-  char name[512];   // scratch for the returned name
-};
+struct AAsset { FILE *f; long size; char path[512]; };
+struct AAssetDir { DIR *dir; char base[512]; char name[512]; };
 
 AAssetManager *asset_manager(void) { return &g_manager; }
 
-// Resolve a name the engine passes to AAssetManager into a real filesystem
-// path. Absolute paths (save data / writable dir, e.g. "sdmc:/switch/vpl/..."
-// or "/...") are opened directly -- they are NOT bundled assets, and prefixing
-// "assets/" broke save read/write alignment. Relative names live under
-// ASSETS_DIR (a leading "assets/" the engine sometimes prepends is stripped).
+// Converte caminho relativo do AAssetManager para o sistema de arquivos local
 static void asset_path(char *out, size_t out_size, const char *name) {
   if (name[0] == '/' || strstr(name, ":/")) {
     snprintf(out, out_size, "%s", name);
@@ -65,6 +36,10 @@ static void asset_path(char *out, size_t out_size, const char *name) {
     struct stat st;
     // Tenta primeiro em HD para plists e graficos de pistas
     snprintf(out, out_size, "%s/HD/%s", ASSETS_DIR, sub_nome);
+    if (stat(out, &st) == 0) return;
+    snprintf(out, out_size, "%s/Common/rube/levels/%s", ASSETS_DIR, sub_nome);
+    if (stat(out, &st) == 0) return;
+    snprintf(out, out_size, "%s/Common/rube/%s", ASSETS_DIR, sub_nome);
     if (stat(out, &st) == 0) return;
     snprintf(out, out_size, "%s/Common/json/levels/%s", ASSETS_DIR, sub_nome);
     if (stat(out, &st) == 0) return;
@@ -87,26 +62,61 @@ AAssetManager *AAssetManager_fromJava_fake(void *env, void *obj) {
 static char s_ultimo_asset_erro[256] = "";
 static int s_contador_asset_erro = 0;
 
-static FILE *tentar_abrir_hd(const char *filename) {
+static FILE *tentar_abrir_hd(const char *filename, char *caminho_saida, size_t tam_saida) {
   char tentativa[512];
   const char *sem_hd = (strncmp(filename, "HD/", 3) == 0) ? filename + 3 : filename;
   const char *base = strrchr(filename, '/');
   const char *nome_limpo = base ? base + 1 : filename;
+  FILE *f = NULL;
 
+  // 1. Shaders (.vsh, .fsh, .psh) residentes em Common/shaders
+  if (strstr(filename, ".vsh") || strstr(filename, ".fsh") || strstr(filename, "shaders/")) {
+    snprintf(tentativa, sizeof(tentativa), "%s/Common/shaders/%s", ASSETS_DIR, nome_limpo);
+    if ((f = fopen(tentativa, "rb"))) goto sucesso;
+    snprintf(tentativa, sizeof(tentativa), "%s/HD/shaders/%s", ASSETS_DIR, nome_limpo);
+    if ((f = fopen(tentativa, "rb"))) goto sucesso;
+  }
+
+  // 2. Texturas de terreno (terrain-ground.png, terrain-bottom-*.png, etc.)
+  if (!strstr(filename, "background") && !strstr(nome_limpo, "background") &&
+      (strstr(filename, "terrain") || strstr(nome_limpo, "terrain") ||
+       strstr(filename, "textures/terrain/"))) {
+    snprintf(tentativa, sizeof(tentativa), "%s/HD/textures/terrain/%s", ASSETS_DIR, nome_limpo);
+    if ((f = fopen(tentativa, "rb"))) goto sucesso;
+    snprintf(tentativa, sizeof(tentativa), "%s/textures/terrain/%s", ASSETS_DIR, nome_limpo);
+    if ((f = fopen(tentativa, "rb"))) goto sucesso;
+    snprintf(tentativa, sizeof(tentativa), "%s/Common/textures/terrain/%s", ASSETS_DIR, nome_limpo);
+    if ((f = fopen(tentativa, "rb"))) goto sucesso;
+  }
+
+  // 3. Subpasta de texturas (evita duplicacao textures/textures/)
+  const char *sem_tex = (strncmp(sem_hd, "textures/", 9) == 0) ? sem_hd + 9 : sem_hd;
+  snprintf(tentativa, sizeof(tentativa), "%s/HD/textures/%s", ASSETS_DIR, sem_tex);
+  if ((f = fopen(tentativa, "rb"))) goto sucesso;
+  snprintf(tentativa, sizeof(tentativa), "%s/textures/%s", ASSETS_DIR, sem_tex);
+  if ((f = fopen(tentativa, "rb"))) goto sucesso;
+
+  // 4. Raiz de HD e subpastas tematicas (backgrounds, ui cocosstudio, elements)
   snprintf(tentativa, sizeof(tentativa), "%s/HD/%s", ASSETS_DIR, sem_hd);
-  FILE *f = fopen(tentativa, "rb");
-  if (!f) {
-    snprintf(tentativa, sizeof(tentativa), "%s/HD/%s", ASSETS_DIR, nome_limpo);
-    f = fopen(tentativa, "rb");
-  }
-  if (!f) {
-    snprintf(tentativa, sizeof(tentativa), "%s/HD/ui/cocosstudio/leagues/%s", ASSETS_DIR, nome_limpo);
-    f = fopen(tentativa, "rb");
-  }
-  if (!f) {
-    snprintf(tentativa, sizeof(tentativa), "%s/Common/%s", ASSETS_DIR, sem_hd);
-    f = fopen(tentativa, "rb");
-  }
+  if ((f = fopen(tentativa, "rb"))) goto sucesso;
+  snprintf(tentativa, sizeof(tentativa), "%s/HD/%s", ASSETS_DIR, nome_limpo);
+  if ((f = fopen(tentativa, "rb"))) goto sucesso;
+  snprintf(tentativa, sizeof(tentativa), "%s/HD/ui/cocosstudio/backgrounds/%s", ASSETS_DIR, nome_limpo);
+  if ((f = fopen(tentativa, "rb"))) goto sucesso;
+  snprintf(tentativa, sizeof(tentativa), "%s/HD/ui/cocosstudio/elements/%s", ASSETS_DIR, nome_limpo);
+  if ((f = fopen(tentativa, "rb"))) goto sucesso;
+  snprintf(tentativa, sizeof(tentativa), "%s/HD/ui/cocosstudio/leagues/%s", ASSETS_DIR, nome_limpo);
+  if ((f = fopen(tentativa, "rb"))) goto sucesso;
+  snprintf(tentativa, sizeof(tentativa), "%s/Common/%s", ASSETS_DIR, sem_hd);
+  if ((f = fopen(tentativa, "rb"))) goto sucesso;
+  snprintf(tentativa, sizeof(tentativa), "%s/Common/%s", ASSETS_DIR, nome_limpo);
+  if ((f = fopen(tentativa, "rb"))) goto sucesso;
+
+  return NULL;
+
+sucesso:
+  if (caminho_saida && tam_saida > 0)
+    snprintf(caminho_saida, tam_saida, "%s", tentativa);
   return f;
 }
 
@@ -120,47 +130,40 @@ AAsset *AAssetManager_open_fake(AAssetManager *mgr, const char *filename, int mo
 
   FILE *f = fopen(path, "rb");
 
-  // Resolucao universal de atlases (.plist) e texturas (.png) residentes em assets/HD
-  if (!f && (strstr(filename, ".plist") || strstr(filename, ".png"))) {
-    f = tentar_abrir_hd(filename);
+  // Resolucao universal de atlases, texturas (.png) e shaders (.vsh, .fsh)
+  if (!f && (strstr(filename, ".plist") || strstr(filename, ".png") ||
+             strstr(filename, ".vsh") || strstr(filename, ".fsh") ||
+             strstr(filename, "shaders/"))) {
+    f = tentar_abrir_hd(filename, path, sizeof(path));
     if (f) {
-      printf("[HD ASSET] Localizado '%s' em HD/Common\n", filename);
+      printf("[HD ASSET] Localizado '%s' -> '%s'\n", filename, path);
       fflush(stdout);
     }
   }
   if (!f && (strstr(filename, ".ogg") || strstr(filename, "audio/") || strstr(filename, "music/"))) {
-    char audio_tentativa[512];
+    char audio_t[512];
     const char *base = strrchr(filename, '/');
     const char *nome_limpo = base ? base + 1 : filename;
-    snprintf(audio_tentativa, sizeof(audio_tentativa), "%s/Common/audio/%s", ASSETS_DIR, nome_limpo);
-    f = fopen(audio_tentativa, "rb");
-    if (!f) {
-      snprintf(audio_tentativa, sizeof(audio_tentativa), "%s/Common/music/%s", ASSETS_DIR, nome_limpo);
-      f = fopen(audio_tentativa, "rb");
-    }
-    if (!f) {
-      snprintf(audio_tentativa, sizeof(audio_tentativa), "%s/Common/%s", ASSETS_DIR, filename);
-      f = fopen(audio_tentativa, "rb");
-    }
-    if (f) {
-      printf("[AUDIO ASSET] Localizado '%s' -> '%s'\n", filename, audio_tentativa);
-      fflush(stdout);
+    snprintf(audio_t, sizeof(audio_t), "%s/Common/audio/%s", ASSETS_DIR, nome_limpo);
+    if (!(f = fopen(audio_t, "rb"))) {
+      snprintf(audio_t, sizeof(audio_t), "%s/Common/music/%s", ASSETS_DIR, nome_limpo);
+      if (!(f = fopen(audio_t, "rb"))) {
+        snprintf(audio_t, sizeof(audio_t), "%s/Common/%s", ASSETS_DIR, filename);
+        f = fopen(audio_t, "rb");
+      }
     }
   }
 
-  // Fallback de seguranca EXCLUSIVO para pecas de veiculos (evita sprite nulo em 0x00c68eec)
-  if (!f && strstr(filename, ".png")) {
-    if (strstr(filename, "cars/") || strstr(filename, "vehicle") ||
-        strstr(filename, "wheel") || strstr(filename, "tire") || strstr(filename, "chassis")) {
-      char fallback[512];
-      snprintf(fallback, sizeof(fallback), "%s/HD/textures/cars/newcar_chassis.png", ASSETS_DIR);
-      f = fopen(fallback, "rb");
-    }
+  // Telemetria factual compulsoria de texturas e shaders de terreno (Regra 10)
+  if (strstr(filename, "terrain") || (strstr(filename, "ground") && !strstr(filename, "background"))) {
+    printf("[TERRAIN ASSET] Requisicao '%s' -> '%s' (sucesso=%d)\n", filename, path, f != NULL);
+    fflush(stdout);
   }
 
   if (!f) {
-    // Silencia tentativas exploratorias de resolucao HD/ e tablet/ da engine Cocos2d-x
-    if (strncmp(filename, "HD/", 3) == 0 || strncmp(filename, "tablet/", 7) == 0) {
+    // Silencia apenas tentativas exploratorias genericas que nao sejam texturas criticas
+    if ((strncmp(filename, "HD/", 3) == 0 || strncmp(filename, "tablet/", 7) == 0) &&
+        !strstr(filename, ".png") && !strstr(filename, ".plist") && !strstr(filename, "terrain")) {
       return NULL;
     }
     // Filtro inteligente de de-duplicacao para blindar I/O e log enxuto (AGENTS.md Secao 6)

@@ -34,6 +34,10 @@ Mapeados 100% offline via JADX (`hcr2_classico/descompilado_android/`):
 - [README.md](file:///d:/Documentos/Ports%20R36S/hcr2_classico/README.md): Documentação geral do port e instruções do repositório
 - [CHANGELOG.md](file:///d:/Documentos/Ports%20R36S/hcr2_classico/CHANGELOG.md): Histórico oficial de versões (Versão atual: 1.6.0)
 - `salvar_no_github.bat`: Script em lote para commit e push automático do port para o GitHub
+- [scripts/01_adb_manager.bat](file:///d:/Documentos/Ports%20R36S/scripts/01_adb_manager.bat): Gerenciador ADB (pareamento Wi-Fi, conexão USB, instalação de APK e logcat)
+- [scripts/02_build_and_install.bat](file:///d:/Documentos/Ports%20R36S/scripts/02_build_and_install.bat): Instalador de APK multi-dispositivo Android
+- [scripts/03_capturar_tela_r36s.bat](file:///d:/Documentos/Ports%20R36S/scripts/03_capturar_tela_r36s.bat): Captura instantânea manual do display do R36S com abertura automática da imagem
+- [capturar_tela_r36s.bat](file:///d:/Documentos/Ports%20R36S/capturar_tela_r36s.bat): Atalho raiz para captura instantânea manual do display
 - `binario_so/libcocos2dcpp.so`: Binário ELF original intocado
 - `assets/`: 5.080 arquivos de assets originais descompactados
 - [arquivo_reversa/auditoria_transicao_garagem.md](file:///d:/Documentos/Ports%20R36S/hcr2_classico/arquivo_reversa/auditoria_transicao_garagem.md): Dossiê da classe `AnimatedSplash` e destravamento dos 50% de loading
@@ -65,16 +69,21 @@ Mapeados 100% offline via JADX (`hcr2_classico/descompilado_android/`):
 - [hcr2_classico/codigo/catalogo_loja.c #L1-L50](file:///d:/Documentos/Ports%20R36S/hcr2_classico/codigo/catalogo_loja.c#L1-L50): Catálogo de itens da loja (moedas e diamantes) e ofertas popup offline
 - [hcr2_classico/codigo/catalogo_loja.c #L51-L95](file:///d:/Documentos/Ports%20R36S/hcr2_classico/codigo/catalogo_loja.c#L51-L95): Tabela de tintas, ofertas especiais e bundles da loja original
 - [hcr2_classico/codigo/catalogo_loja.c #L96-L126](file:///d:/Documentos/Ports%20R36S/hcr2_classico/codigo/catalogo_loja.c#L96-L126): Consulta de recompensas (hcr_lookup_shop_reward) e inicialização da loja offline
-- [hcr2_classico/codigo/hotpatches_arm64.c #L1-L45](file:///d:/Documentos/Ports%20R36S/hcr2_classico/codigo/hotpatches_arm64.c#L1-L45): Trampolim de glifos `s_trampolim_glyph`, hook `hook_get_glyph_name` e bypass de savegame (0x533440)
-- [hcr2_classico/codigo/hotpatches_arm64.c #L46-L83](file:///d:/Documentos/Ports%20R36S/hcr2_classico/codigo/hotpatches_arm64.c#L46-L83): Blindagem de veículos na Garagem (0xC68368, 0xC68D00, 0xC68EEC) e loop de fontes (0xA7CE34)
-- [hcr2_classico/codigo/hotpatches_arm64.c #L84-L137](file:///d:/Documentos/Ports%20R36S/hcr2_classico/codigo/hotpatches_arm64.c#L84-L137): Instalação do gancho universal de glifos (`patch_blindagem_universal_glifos`) e transição imediata para Garagem
+- [hcr2_classico/codigo/hotpatches_arm64.c #L1-L60](file:///d:/Documentos/Ports%20R36S/hcr2_classico/codigo/hotpatches_arm64.c#L1-L60): Funções de infraestrutura ARM64, instalar_gancho_arm64, trampolins e hook universal de glifos
+- [hcr2_classico/codigo/hotpatches_arm64.c #L61-L135](file:///d:/Documentos/Ports%20R36S/hcr2_classico/codigo/hotpatches_arm64.c#L61-L135): Hooks de pipeline de terreno: telemetria de upload (0x6D28A4), bind de textura/programa em draw (0x6D3368) e alloc (0x6D15B8)
+- [hcr2_classico/codigo/hotpatches_arm64.c #L136-L195](file:///d:/Documentos/Ports%20R36S/hcr2_classico/codigo/hotpatches_arm64.c#L136-L195): Bypass de validação de savegame offline (0x533440), blindagem de veículos (0xC68368, 0xC68D00, 0xC68EEC) e fontes (0xA7CE34)
+- [hcr2_classico/codigo/hotpatches_arm64.c #L196-L253](file:///d:/Documentos/Ports%20R36S/hcr2_classico/codigo/hotpatches_arm64.c#L196-L253): Ganchos de terreno, transição splash e patch de carregamento de solo nativo (0x6D12F0, 0x6D1320 NOPs)
+
+
+
 - [hcr2_classico/codigo/carregador_atlas.c #L1-L84](file:///d:/Documentos/Ports%20R36S/hcr2_classico/codigo/carregador_atlas.c#L1-L84): Pré-carregamento síncrono de atlases e spritesheets no SpriteFrameCache (game.plist, flag_atlas, vehicles, drivers, collectibles, pistas)
 - [hcr2_classico/codigo/controles_r36s.c #L1-L45](file:///d:/Documentos/Ports%20R36S/hcr2_classico/codigo/controles_r36s.c#L1-L45): Variáveis de estado do gamepad e controles_r36s_init com auditoria de mapeamento SDL
-- [hcr2_classico/codigo/controles_r36s.c #L46-L100](file:///d:/Documentos/Ports%20R36S/hcr2_classico/codigo/controles_r36s.c#L46-L100): Tratamento de atalhos universais SELECT + START, overlay menu e botões do gamepad
-- [hcr2_classico/codigo/controles_r36s.c #L101-L168](file:///d:/Documentos/Ports%20R36S/hcr2_classico/codigo/controles_r36s.c#L101-L168): Calibração com deadzone (0.25), eixos analógicos, mouse relativo e teclado
+- [hcr2_classico/codigo/controles_r36s.c #L46-L105](file:///d:/Documentos/Ports%20R36S/hcr2_classico/codigo/controles_r36s.c#L46-L105): Tratamento de atalhos universais SELECT + START, overlay menu, suporte unificado de clique nos botões A e B
+- [hcr2_classico/codigo/controles_r36s.c #L106-L198](file:///d:/Documentos/Ports%20R36S/hcr2_classico/codigo/controles_r36s.c#L106-L198): Calibração com deadzone (0.25), eixos analógicos, mouse relativo e teclado
 - [hcr2_classico/codigo/toque_virtual.c #L1-L45](file:///d:/Documentos/Ports%20R36S/hcr2_classico/codigo/toque_virtual.c#L1-L45): Estruturas multitouch, fade de transparência e toque_virtual_init
-- [hcr2_classico/codigo/toque_virtual.c #L46-L85](file:///d:/Documentos/Ports%20R36S/hcr2_classico/codigo/toque_virtual.c#L46-L85): Trava de clique anti-swipe do cursor, limites da tela e mapeamento de pedais
-- [hcr2_classico/codigo/toque_virtual.c #L86-L128](file:///d:/Documentos/Ports%20R36S/hcr2_classico/codigo/toque_virtual.c#L86-L128): Despacho de eventos multitouch Cocos2d-x (nativeTouchesBegin/Move/End) com telemetria
+- [hcr2_classico/codigo/toque_virtual.c #L46-L95](file:///d:/Documentos/Ports%20R36S/hcr2_classico/codigo/toque_virtual.c#L46-L95): Trava de clique anti-swipe do cursor, limites da tela e isolamento de pedais em corrida (g_is_in_game)
+- [hcr2_classico/codigo/toque_virtual.c #L96-L140](file:///d:/Documentos/Ports%20R36S/hcr2_classico/codigo/toque_virtual.c#L96-L140): Despacho de eventos multitouch Cocos2d-x (nativeTouchesBegin/Move/End) com telemetria detalhada de coordenadas
+- [hcr2_classico/codigo/telemetria_gl.c #L1-L89](file:///d:/Documentos/Ports%20R36S/hcr2_classico/codigo/telemetria_gl.c#L1-L89): Telemetria de shaders GLSL, status de link de program, desativação de culling em malhas de terreno e interceptação detalhada de glDrawArrays e glDrawElements
 
 
 

@@ -59,6 +59,7 @@ static int isfinite_wrap(double d) { return isfinite(d); }
 #include "libc_shim.h"
 #include "opensles.h"
 #include "asset_shim.h"
+#include "telemetria_gl.h"
 
 // ctype entries are macros in newlib; drop the macros so we can take addresses
 #undef isalnum

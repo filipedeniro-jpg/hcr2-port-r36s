@@ -70,7 +70,11 @@ void carregar_atlases_essenciais(void) {
     "HD/countryside_gfx_01.plist",// Cenário da primeira pista (Countryside/Tutorial)
     "HD/forest2_gfx.plist",       // Cenário da pista Forest
     "HD/city_gfx.plist",          // Cenário da pista City
-    "HD/mountain_gfx_01.plist"    // Cenário da pista Mountain
+    "HD/mountain_gfx_01.plist",   // Cenário da pista Mountain
+    "HD/beach_gfx_01.plist",      // Cenário da pista Beach
+    "HD/desert_gfx_01.plist",     // Cenário da pista Desert
+    "HD/mine_gfx.plist",          // Cenário da pista Mine
+    "HD/glacier_gfx_01.plist"     // Cenário da pista Glacier
   };
 
   for (size_t i = 0; i < sizeof(atlases) / sizeof(atlases[0]); i++) {

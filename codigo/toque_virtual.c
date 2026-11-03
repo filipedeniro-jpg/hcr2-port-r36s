@@ -7,6 +7,8 @@
 #include "jni_fake.h"
 #include "toque_virtual.h"
 
+extern int g_is_in_game;
+
 // Estrutura de rastreamento de toques multitouch
 typedef struct {
   int ativo;
@@ -79,15 +81,15 @@ void toque_virtual_processar(float dx, float dy, int clique, int freio, int gas)
     novos_toques[0].y = g_cursor_y;
   }
 
-  // [1] Pedal de freio (canto inferior esquerdo)
-  if (freio) {
+  // [1] Pedal de freio (canto inferior esquerdo) - ativo SOMENTE em corrida
+  if (g_is_in_game && freio) {
     novos_toques[1].ativo = 1;
     novos_toques[1].x = screen_width * 0.16f;
     novos_toques[1].y = screen_height * 0.82f;
   }
 
-  // [2] Pedal de acelerador (canto inferior direito)
-  if (gas) {
+  // [2] Pedal de acelerador (canto inferior direito) - ativo SOMENTE em corrida
+  if (g_is_in_game && gas) {
     novos_toques[2].ativo = 1;
     novos_toques[2].x = screen_width * 0.84f;
     novos_toques[2].y = screen_height * 0.82f;
@@ -97,7 +99,8 @@ void toque_virtual_processar(float dx, float dy, int clique, int freio, int gas)
   for (int i = 0; i < 4; i++) {
     if (novos_toques[i].ativo && !s_toques_atuais[i].ativo && nativeTouchesBegin) {
       if (i == 0) {
-        printf("[CONTROLES] Inicio clique cursor em (%.1f, %.1f)\n", novos_toques[i].x, novos_toques[i].y);
+        printf("[CONTROLES CLIQUE] Toque cursor Begin: x=%.1f, y=%.1f (Tela: %dx%d)\n",
+               novos_toques[i].x, novos_toques[i].y, screen_width, screen_height);
         fflush(stdout);
       }
       nativeTouchesBegin(fake_env, renderer_cls, i, novos_toques[i].x, novos_toques[i].y);
@@ -126,7 +129,8 @@ void toque_virtual_processar(float dx, float dy, int clique, int freio, int gas)
   for (int i = 0; i < 4; i++) {
     if (!novos_toques[i].ativo && s_toques_atuais[i].ativo && nativeTouchesEnd) {
       if (i == 0) {
-        printf("[CONTROLES] Fim clique cursor em (%.1f, %.1f)\n", s_toques_atuais[i].x, s_toques_atuais[i].y);
+        printf("[CONTROLES CLIQUE] Toque cursor End: x=%.1f, y=%.1f\n",
+               s_toques_atuais[i].x, s_toques_atuais[i].y);
         fflush(stdout);
       }
       nativeTouchesEnd(fake_env, renderer_cls, i, s_toques_atuais[i].x, s_toques_atuais[i].y);

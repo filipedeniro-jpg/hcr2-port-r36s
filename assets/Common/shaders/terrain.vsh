@@ -13,5 +13,5 @@ void main()
 {
 	gl_Position = CC_MVPMatrix * vec4(a_position.xyz + u_params.xyz * a_texCoord.w, 1.0);
 	v_texCoord_light_mul = vec4(a_texCoord.xyz, a_position.w);
-	v_texCoord_light_mul.y += u_params.w*a_texCoord.w;
+	v_texCoord_light_mul.y += u_params.w * a_texCoord.w;
 }

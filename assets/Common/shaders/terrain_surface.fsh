@@ -6,5 +6,9 @@ varying vec4 v_texCoord_light_mul;
 
 void main()
 {
-	gl_FragColor = texture2D(CC_Texture0, v_texCoord_light_mul.xy) * vec4(v_texCoord_light_mul.zzz, 1.0) * v_texCoord_light_mul.w;
+    vec4 tex = texture2D(CC_Texture0, v_texCoord_light_mul.xy);
+    if (tex.a < 0.05) {
+        discard;
+    }
+    gl_FragColor = tex;
 }

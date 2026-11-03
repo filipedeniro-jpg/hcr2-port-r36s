@@ -5,6 +5,24 @@ O formato é baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.
 
 ---
 
+## [1.7.0] - 03/11/2026 01:50
+
+### 🌍 Extrusão do Solo Subterrâneo, Atalhos de Captura Manual e Referência Android Ground Truth
+
+- **Novidades**:
+  - **Captura Manual Instantânea (`capturar_tela_r36s.bat` e `scripts/03_capturar_tela_r36s.bat`)**: Utilitário em 1 clique para extração direta do framebuffer do R36S via SSH com abertura automática da imagem capturada no Windows.
+  - **Ferramenta de Telemetria Android (`ferramentas/coletar_dados_android.py`)**: Script automatizado para conectar via ADB ao tablet físico, obter PID e despejar logcat para comparação de referência com o binário oficial.
+  - **Ground Truth Oficial**: Captura e catalogação de referência visual e de shaders do APK oficial v1.28.2 rodando em hardware Android real.
+
+- **Correções**:
+  - **Correção da Projeção Vertical do Solo (`terrain_surface.vsh`)**: Identificado através dos logs de vértice (`pos.y = -0.4` colapsado em altura zero) que a malha do solo subterrâneo necessitava de projeção vertical descendente vinculada ao marcador `a_texCoord.y == 1.0`. A pista flutuante foi eliminada e o terreno agora preenche toda a base da tela atrás dos pedais.
+  - **Sincronização Redundante de Shaders**: Pipeline de envio do `enviar_e_executar.py` atualizado para propagar os shaders GLSL corrigidos para `HD/shaders/`, `Common/shaders/` e `shaders/`.
+
+- **Métricas Comprovadas no Hardware Físico**:
+  - Mais de **2.910 quadros sustentados** a **61,3 FPS** estáveis na GPU Mali-G31 com a malha inferior de solo ativa no console R36S.
+
+---
+
 ## [1.6.0] - 01/11/2026 12:26
 
 ### 🎮 Controles Calibrados, Trava de Clique Anti-Swipe e Modularização SRP

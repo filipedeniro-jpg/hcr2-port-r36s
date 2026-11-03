@@ -14,8 +14,13 @@ varying float v_blendcoef;
 
 void main()
 {
-	gl_Position = CC_MVPMatrix * vec4(a_position.xyz + u_params.xyz * a_texCoord.w, 1.0);
+	float fator_fundo = a_texCoord.y;
+	vec3 pos = a_position.xyz;
+	// Extrusao vertical descendente do solo para preencher a base da tela
+	pos.y -= 25.0 * fator_fundo;
+	gl_Position = CC_MVPMatrix * vec4(pos, 1.0);
+
 	v_texCoord_light_mul = vec4(a_texCoord.xyz, a_position.w);
-	v_texCoord_light_mul.y += u_params.w*a_texCoord.w;
-	v_blendcoef = clamp((a_position.y - u_depthfade.y) / u_depthfade.x, 0.0, 1.0);
+	v_texCoord_light_mul.y = a_texCoord.y * 4.0;
+	v_blendcoef = 1.0 - fator_fundo;
 }

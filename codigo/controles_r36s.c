@@ -23,6 +23,8 @@ static float s_rstick_y = 0.0f;
 static int s_tem_gamecontroller = 0;
 static int s_tecla_fn_ativa = 0;
 
+extern int g_is_in_game;
+
 void controles_r36s_init(void) {
   if (SDL_GameControllerAddMappingsFromFile("gamecontrollerdb.txt") > 0) {
     printf("[HCR] Base gamecontrollerdb.txt carregada com sucesso.\n");
@@ -73,8 +75,12 @@ void update_input(void) {
       }
 
       int btn = ev.cbutton.button;
-      if (btn == config.btn_gas)   s_gas_pressionado = 1;
-      if (btn == config.btn_click) s_clique_pressionado = 1;
+      if (!g_is_in_game && (btn == config.btn_click || btn == config.btn_gas)) {
+        s_clique_pressionado = 1;
+      } else {
+        if (btn == config.btn_gas)   s_gas_pressionado = 1;
+        if (btn == config.btn_click) s_clique_pressionado = 1;
+      }
       if (btn == config.btn_brake) s_freio_pressionado = 1;
       if (btn == config.btn_boost && nativeHcrControllerKeyEvent) {
         nativeHcrControllerKeyEvent(fake_env, renderer_cls, CODIGO_BOTAO_X, 1);
@@ -87,7 +93,10 @@ void update_input(void) {
         s_tecla_fn_ativa = 0;
       }
       int btn = ev.cbutton.button;
-      if (btn == config.btn_gas)   s_gas_pressionado = 0;
+      if (btn == config.btn_gas) {
+        s_gas_pressionado = 0;
+        if (!g_is_in_game) s_clique_pressionado = 0;
+      }
       if (btn == config.btn_click) s_clique_pressionado = 0;
       if (btn == config.btn_brake) s_freio_pressionado = 0;
       if (btn == config.btn_boost && nativeHcrControllerKeyEvent) {

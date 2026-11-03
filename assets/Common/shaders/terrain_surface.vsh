@@ -9,7 +9,9 @@ varying vec4 v_texCoord_light_mul;
 
 void main()
 {
-	gl_Position = CC_MVPMatrix * vec4(a_position.xyz, 1.0);
+	vec3 pos = a_position.xyz;
+	// Extrusao vertical descendente da base do solo (a_texCoord.y == 1.0)
+	pos.y -= 25.0 * a_texCoord.y;
+	gl_Position = CC_MVPMatrix * vec4(pos, 1.0);
 	v_texCoord_light_mul = vec4(a_texCoord.xyz, a_position.w);
-	//v_texCoord_light_mul = vec4(a_texCoord.xy, a_texCoord.z * (1.0-0.5*a_texCoord.w*max(1.0-a_texCoord.y,0.0)), a_position.w);
 }
